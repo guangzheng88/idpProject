@@ -1,7 +1,0 @@
-/*组件 lj-list-demo样式*/
-.list-demo{width:100%; border-collapse:collapse; background:#fff; border:1px solid #e1e1e1;}
-.list-demo th, .list-demo td{ border:1px solid #e1e1e1;padding:5px 10px;}
-.list-demo th{ color:#fff;background: #9A9DA2;}
-.list-demo .color-blue{ color:#327AC2;}
-.list-demo tr:nth-child(odd){background:#F2F1F0;}
-.list-demo tr:nth-child(even){background:#FFFFFF;}

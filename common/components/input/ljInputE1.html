@@ -1,5 +1,0 @@
-<!-- 数量 -->
-<div>
-    <input type="number" ng-class="{true: 'form-control input-m', false: 'form-control input-m input-error '}[active]"  max="{{maxnum ||''}}" ng-model='ljvalue' ng-blur='ljf()' placeholder="{{place || ''}}" ng-value="ljvalue" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" min="1">
-    <span class="input-span-error"  ng-if='msg'> {{msg}}</span>
-</div>
