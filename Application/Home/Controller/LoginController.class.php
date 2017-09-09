@@ -3,6 +3,30 @@ namespace Home\Controller;
 use Think\Controller;
 class LoginController extends Controller {
     /**
+     * 用户登录
+     */
+    public function login()
+    {
+        $map['username'] = trim(I('post.username'));
+        $map['password'] = md5(trim(I('post.password')));
+        $res = M('admin')->where($map)->find();
+        $result['status'] = 0;
+        if(!$res)
+        {
+            $result['error'] = '用户名或密码错误';
+            $this->ajaxReturn($result);
+        }
+        if($res['status'] != 1)
+        {
+            $result['error'] = '用户未审核';
+            $this->ajaxReturn($result);
+        }
+        //注册session
+        session('userinfo',$res);
+        $result['status'] = 1;
+        $this->ajaxReturn($result);
+    }
+    /**
      * 用户注册
      */
     public function register()
