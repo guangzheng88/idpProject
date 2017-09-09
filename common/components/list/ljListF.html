@@ -1,0 +1,109 @@
+<div id="brandContent">
+	<ul class="brand_list_ul">
+		<li ng-click="brandposition({str:'brand_list_A'})">
+			<span>A</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_B'})">
+			<span>B</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_C'})">
+			<span>C</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_D'})">
+			<span>D</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_E'})">
+			<span>E</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_F'})">
+			<span>F</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_G'})">
+			<span>G</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_H'})">
+			<span>H</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_I'})">
+			<span>I</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_J'})">
+			<span>J</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_K'})">
+			<span>K</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_L'})">
+			<span>L</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_M'})">
+			<span>M</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_N'})">
+			<span>N</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_O'})">
+			<span>O</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_P'})">
+			<span>P</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_Q'})">
+			<span>Q</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_R'})">
+			<span>R</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_S'})">
+			<span>S</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_T'})">
+			<span>T</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_U'})">
+			<span>U</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_V'})">
+			<span>V</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_W'})">
+			<span>W</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_X'})">
+			<span>X</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_Y'})">
+			<span>Y</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_Z'})">
+			<span>Z</span>
+		</li>
+		<li ng-click="brandposition({str:'brand_list_num'})">
+			<span>#</span>
+		</li>
+	</ul>
+	<div class="brandContent">
+		<div ng-repeat="brandOne in brandlist" class="brandLetter brand_list_{{brandOne.brandMark}}" >
+			<dl>
+			<dt>{{brandOne.brandMark}}</dt>
+			<dd ng-repeat='itemone in brandOne.brandInfo'>
+				<a href="{{brandurl}}{{itemone.brand_id}}">
+					<div class="media-left brandImg">
+						<img ng-if="itemone.logo == ''" class="media-object" ng-src="{{defualtimg}}" width="{{imgwid}}" height="{{imgheight}}"/>
+						<img ng-if="itemone.logo != ''" class="media-object" ng-src="{{logourl+itemone.logo}}" width="{{imgwid}}" height="{{imgheight}}">
+					</div>
+					<div class="media-body brandName">
+						<h4 class="media-heading">{{itemone.brand_name}}</h4>
+					</div>
+				</a>
+			</dd>	
+			</dl>
+		</div>
+	</div>
+	<div id="go_top">  
+	    <a href="#">
+	    	<img src="{{gotopimg}}" width="60%" height="60%">
+	    </a>
+	</div>
+</div>
+

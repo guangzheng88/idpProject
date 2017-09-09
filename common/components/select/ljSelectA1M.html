@@ -1,0 +1,6 @@
+<div  class="select-a1-m" >
+<select ng-change="ljfun({fs:selected})"   ng-model="selected" >
+    <option ng-repeat="item in selectArr" value="{{item.id}}" >{{item.name}}</option>
+</select>
+<span class="select-a-error" ng-if='errorShow'>{{errorText}}</span>
+</div>

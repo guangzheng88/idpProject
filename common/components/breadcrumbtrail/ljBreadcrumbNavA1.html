@@ -1,0 +1,16 @@
+<div class="container">
+	<div class="breadcrumb-nav-a1">
+		<ul>
+			<li >
+				当前位置：
+			</li>
+			<li ng-repeat="nav in listArr">
+				<span ng-if="$index+1 < listArr.length">
+					<a href="{{nav.href}}">{{nav.name}}</a>
+					<span>></span>
+				</span>	
+				<span ng-if="$index+1 == listArr.length">{{nav.name}}</span>
+			</li>
+		</ul>
+	</div>	
+</div>

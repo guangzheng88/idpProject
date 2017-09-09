@@ -1,0 +1,74 @@
+<div class="paging-a1" ng-if="res">
+    共<span class="paging-sum">{{count}}</span>个条目
+    <a ng-click="ljf({data:0})"    class="home-page-a1">
+        <span>首页</span>
+    </a>
+    <a ng-click="ljf({data:res.pageInfo.row6.offset})"  class="paging-a1-prev" ng-if='res.pageInfo.row6.sign'>
+        <span>
+                <!-- 上一页 -->
+            <img src="/common/images/page_left_01.jpg" alt="上一页">
+        </span>
+    </a>
+        <a   class="paging-a1-prev" ng-if='!res.pageInfo.row6.sign'>
+        <span>
+                <!-- 上一页 -->
+            <img src="/common/images/page_left_01.jpg" alt="上一页">
+        </span>
+    </a>
+<a ng-click="ljf({data:res.pageInfo.row1.offset})"   class="paging-a1-default paging-a1-active" ng-if='res.pageInfo.row1.sign'>
+    <span>{{res.pageInfo.row1.num}}</span>
+</a>
+<a ng-click="ljf({data:res.pageInfo.row2.offset})"   class="paging-a1-default paging-a1-active" ng-if='res.pageInfo.row2.sign'>
+    <span>{{res.pageInfo.row2.num}}</span>
+</a>
+<a ng-click="ljf({data:res.pageInfo.row3.offset})"   class="paging-a1-default paging-a1-active " ng-if='res.pageInfo.row3.sign'>
+    <span>{{res.pageInfo.row3.num}}</span>
+</a>
+<a ng-click="ljf({data:res.pageInfo.row4.offset})"   class="paging-a1-default paging-a1-active " ng-if='res.pageInfo.row4.sign'>
+    <span>{{res.pageInfo.row4.num}}</span>
+</a>
+<a ng-click="ljf({data:res.pageInfo.row5.offset})"   class="paging-a1-default paging-a1-active " ng-if='res.pageInfo.row5.sign'>
+    <span>{{res.pageInfo.row5.num}}</span>
+</a>
+<a ng-click="ljf({data:res.pageInfo.row6.offset})"   class="paging-a1-default paging-a1-active" ng-if='res.pageInfo.row6.sign'>
+    <span>{{res.pageInfo.row6.num}}</span>
+</a>
+<a ng-click="ljf({data:res.pageInfo.row7.offset})"   class="paging-a1-default paging-a1-active paging-a1-now " ng-if='res.pageInfo.row7.sign'>
+    <span>{{res.pageInfo.row7.num}}</span>
+</a>
+<a ng-click="ljf({data:res.pageInfo.row8.offset})"   class="paging-a1-default paging-a1-active " ng-if='res.pageInfo.row8.sign'>
+    <span>{{res.pageInfo.row8.num}}</span>
+</a>
+<a ng-click="ljf({data:res.pageInfo.row9.offset})"   class="paging-a1-default paging-a1-active" ng-if='res.pageInfo.row9.sign'>
+    <span>{{res.pageInfo.row9.num}}</span>
+</a>
+<a ng-click="ljf({data:res.pageInfo.row10.offset})"   class="paging-a1-default paging-a1-active " ng-if='res.pageInfo.row10.sign'>
+    <span>{{res.pageInfo.row10.num}}</span>
+</a>
+<a ng-click="ljf({data:res.pageInfo.row11.offset})"   class="paging-a1-default paging-a1-active" ng-if='res.pageInfo.row11.sign'>
+    <span>{{res.pageInfo.row11.num}}</span>
+</a>
+<a ng-click="ljf({data:res.pageInfo.row12.offset})"   class="paging-a1-default paging-a1-active " ng-if='res.pageInfo.row12.sign'>
+    <span>{{res.pageInfo.row12.num}}</span>
+</a>
+<a ng-click="ljf({data:res.pageInfo.row13.offset})"   class="paging-a1-default paging-a1-active" ng-if='res.pageInfo.row13.sign'>
+    <span>{{res.pageInfo.row13.num}}</span>
+</a>
+    <a ng-click="ljf({data:res.pageInfo.row8.offset})" ng-if='res.pageInfo.row8.sign' class="paging-a1-right">
+        <span>
+             <!-- 下一页 -->
+            <img src="/common/images/page_right_01.jpg" alt="下一页">
+        </span>
+    </a>
+        <a ng-if='!res.pageInfo.row8.sign' class="paging-a1-right">
+        <span>
+             <!-- 下一页 -->
+            <img src="/common/images/page_right_01.jpg" alt="下一页">
+        </span>
+    </a>
+    <a ng-click="ljf({data:(res.lastOffset)})"  class="last-page-a1">
+        <span>尾页</span>
+    </a>
+    <input type="text" class="paging-a1-input" ng-model='goNum' ng-value="goNum">
+    <a ng-click="go(goNum)"   class="paging-a1-go">go</a> 
+</div>

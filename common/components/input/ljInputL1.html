@@ -1,0 +1,5 @@
+<div>
+	<!-- 单独密码框 -->
+	<input type="password" name="input_pass" ng-class="{true: 'form-control input-m', false: 'form-control input-m input-error '}[active]" ng-model="ljvalue" placeholder="{{defaultmsg}}" ng-blur="ljfja()"><!-- 错误提示框颜色class为input-error -->
+	<span class="input-span-error" ng-if='msg'>{{msg}}</span>
+</div>

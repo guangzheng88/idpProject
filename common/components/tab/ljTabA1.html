@@ -1,0 +1,9 @@
+<div>
+	<div class="container">
+	  <ul class="nav nav-pills" role="tablist">
+	    <li ng-repeat="tabone in tabsA1"><a ng-click="selectOne({fs:'content'+$index,fs1:tabone.content})">{{tabone.tabsA1Name}}</a></li>
+	  </ul>
+	</div>
+	<iframe name="content_frame" id='myiframe' height="" class="r_groupActivie" width=100% src="{{tabsA1[0].content}}" frameborder=0></iframe> 
+	<div class="r_groupActivie content{{$index}}" ng-repeat="tabone in tabsA1" id="content{{$index}}"></div>
+</div>

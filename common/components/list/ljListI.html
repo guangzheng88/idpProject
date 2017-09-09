@@ -1,0 +1,47 @@
+
+<table class="table listi-table">
+	<thead>
+		<tr ng-show="titleArr">
+				<th width="{{title.width}}" ng-repeat="title in titleArr">{{title.name}}</th>
+		</tr>
+		
+	</thead>
+	<tbody>
+		<tr ng-repeat="list in listArr">
+				<td ng-if ='titleArr.th1'>{{list.td1||'-----'}}</td>
+				<td ng-if ='titleArr.th2'>{{list.td2||'-----'}}</td>
+				<td ng-if="titleArr.th3">{{list.td3||'-----'}}</td>
+
+				<td  ng-show="titleArr.th4" ng-if="list.td4==1">{{statusArr.status1}}</td>
+				<td  ng-show="titleArr.th4" ng-if="list.td4==2" class="issued">{{statusArr.status2}}</td>
+				<td  ng-show="titleArr.th4" ng-if="list.td4==3" class="used">{{statusArr.status3}}</td>
+				<td  ng-show="titleArr.th4" ng-if="list.td4==4" class="cancellation">{{statusArr.status4}}</td>
+				<td  ng-show="titleArr.th4" ng-if="list.td4==5" class="expired">{{statusArr.status5}}</td>
+				<td  ng-show="titleArr.th4" ng-if="list.td4=='' || list.td4==0 || list.td4>5">-----</td>
+
+				<td ng-if="titleArr.th5">{{list.td5||'-----'}}</td>
+				<td ng-if="titleArr.th6">{{list.td6||'-----'}}</td>
+				<td ng-if="titleArr.th7">{{list.td7||'-----'}}</td>
+				<td ng-if="titleArr.th8">{{list.td8||'-----'}}</td>
+				<td ng-if="titleArr.th9">{{list.td9||'-----'}}</td>
+				<td ng-if="titleArr.th10">{{list.td10||'-----'}}</td>
+				<td ng-if="titleArr.th11">{{list.td11||'-----'}}</td>
+				<td ng-if="titleArr.th12">{{list.td12||'-----'}}</td>
+				<td ng-if="titleArr.th13">{{list.td13||'-----'}}</td>
+				<td ng-if="titleArr.th14">{{list.td14||'-----'}}</td>
+				<td ng-if="titleArr.th15">{{list.td15||'-----'}}</td>
+				<td class="listb-table-a-color" ng-show="operations">
+					<a ng-if="list.td4 == 3" ng-click="fun1({fs:list})" class="listi-table-a-color">{{operations.fun1Name}}</a>
+					<a ng-if="list.td4 != 3">-----</a>
+
+					<a ng-click="fun2({fs:list})" class="listi-table-a-color">{{operations.fun2Name}}</a>
+					<a ng-click="fun3({fs:list})" class="listi-table-a-color" >{{operations.fun3Name}}</a>
+					<a ng-click="fun4({fs:list})" class="listi-table-a-color">{{operations.fun4Name}}</a>
+				</td>
+			</tr>
+			<!-- 行数补全 -->
+			<tr ng-repeat="tr in completes" ng-if='completes'>
+				<td ng-repeat="td in tr" ></td>
+			</tr>
+	</tbody>
+</table>

@@ -1,0 +1,38 @@
+<div class="container-fluid">
+	<table class="table listb-table">
+		<thead>
+			<tr ng-show="titleArr">
+				<th width="{{title.width}}" ng-repeat="title in titleArr">{{title.name}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="list in listArr">
+				<td ng-if ='titleArr.th1'>{{list.td1||'-----'}}</td>
+				<td ng-if ='titleArr.th2'>{{list.td2||'-----'}}</td>
+				<td ng-if="titleArr.th3">{{list.td3||'-----'}}</td>
+				<td ng-if="titleArr.th4">{{list.td4||'-----'}}</td>
+				<td ng-if="titleArr.th5">{{list.td5||'-----'}}</td>
+				<td ng-if="titleArr.th6">{{list.td6||'-----'}}</td>
+				<td ng-if="titleArr.th7">{{list.td7||'-----'}}</td>
+				<td ng-if="titleArr.th8">{{list.td8||'-----'}}</td>
+				<td ng-if="titleArr.th9">{{list.td9||'-----'}}</td>
+				<td ng-if="titleArr.th10">{{list.td10||'-----'}}</td>
+				<td ng-if="titleArr.th11">{{list.td11||'-----'}}</td>
+				<td ng-if="titleArr.th12">{{list.td12||'-----'}}</td>
+				<td ng-if="titleArr.th13">{{list.td13||'-----'}}</td>
+				<td ng-if="titleArr.th14">{{list.td14||'-----'}}</td>
+				<td ng-if="titleArr.th15">{{list.td15||'-----'}}</td>
+				<td class="listb-table-a-color" ng-show="operations">
+					<a  ng-click="fun1({fs:list})" class="listb-table-a">{{operations.fun1Name}}</a>
+					<a ng-click="fun2({fs:list})" class="listb-table-a">{{operations.fun2Name}}</a>
+					<a ng-click="fun3({fs:list})" class="listb-table-a" >{{operations.fun3Name}}</a>
+					<a ng-click="fun4({fs:list})" class="listb-table-a">{{operations.fun4Name}}</a>
+				</td>
+			</tr>
+			<!-- 行数补全 -->
+			<tr ng-repeat="tr in completes" ng-if='completes'>
+				<td ng-repeat="td in tr" ></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

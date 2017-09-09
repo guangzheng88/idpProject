@@ -1,0 +1,18 @@
+<div>
+	<div class="newList">
+		<ul class="list-group" style="list-style-type:square;">
+			<a ng-repeat="onenews in newlist"  href="{{newdetailurl}}/{{onenews.news_id}}">
+				<li class="list-group-item">
+					<img src="/common/images/point.png" alt="">
+					<span class="new_list_right">></span>
+					{{onenews.news_title | cutword:true:cutwordlen:' ...'}}
+				</li>
+			</a>
+		</ul>
+	</div>
+	<div id="go_top">  
+	    <a href="#">
+	    	<img src="{{topurl}}" width="60%" height="60%">
+	    </a>
+	</div>
+</div>

@@ -1,0 +1,5 @@
+<!-- 数字 -->
+<div>
+    <input type="text" ng-class="{true: 'form-control input-m', false: 'form-control input-m input-error '}[active]" ng-model='ljvalue' ng-blur='ljf()' placeholder="{{place || ''}}" ng-value="ljvalue" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))">
+    <span class="input-span-error"  ng-if='msg'> {{msg}}</span>
+</div>

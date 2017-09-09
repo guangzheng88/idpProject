@@ -1,0 +1,17 @@
+<div class="more_image">
+	<div id="up_status" style="display:none"><img src="/common/images/loader.gif" alt="uploading"/></div>
+	<div id="up_btn" class="btn">
+		<span>添加图片</span>
+		<input id="photoimg" type="file" name="photoimg" onchange="angular.element(this).scope().uploadImageOne()">
+	</div>
+	<span style="color:red;display:none;margin-top:3px;" id='imgError'>格式错误</span>
+    <span class="img_claim">图片大小不超过2M，仅支持png/jpeg/jpg/gif格式</span>
+    <!-- 图片预览 存放上传好的图片用 start-->
+	<div id="preview" class="uploader-images-b1">
+		<span ng-if="alreadyImg !=''" ng-repeat="imgItem in alreadyImg">
+			<img ng-src="{{imgItem.imgUrl}}" class='preview'><em class='alreadyDel' ng-click="delImg({id:imgItem.id,imgName:imgItem.imgName,imgUrl:imgItem.imgUrl.substring(1)})" id='delimgb{{$index}}'>
+			</em><!-- 删除按钮 -->
+		</span>
+	</div>
+	<!-- 图片预览 存放上传好的图片用 end-->
+</div>

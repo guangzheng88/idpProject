@@ -1,0 +1,15 @@
+<span class="com_list_li" style="width:100%">
+	<a href="{{producturl}}{{product.product_id}}">
+		<div class="com_list_img">
+			<img ng-src="{{product.product_img || altimg}}" width="{{prowidth}}" height="{{proheight}}">
+		</div>
+		<h4><span class="custom_color" ng-if="product.customize_status==1">[可定制]</span>{{product.product_name}}</h4>
+		<p>
+			<b>￥{{product.discount_price}}</b>
+		</p>
+		<div class="merchant_p">
+			<p>{{product.con_resource}}</p>
+			<p>已售<span>{{product.sale_num}}</span>件</p>
+		</div>
+	</a>
+</span>

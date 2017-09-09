@@ -1,0 +1,6 @@
+<div>
+    <div class="checkbox checkbox-success checkbox-inline checkbox-a-1" ng-repeat="item in checks">
+        <input class="styled" id="{{item.id}}" type="checkbox"  ng-model="item.done"  ng-disabled='{{item.isDisabled}}'>
+        <label for="{{item.id}}">{{item.name}}</label>
+    </div>
+</div>
