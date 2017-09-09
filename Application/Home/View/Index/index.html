@@ -20,18 +20,16 @@
     <h2>IDP教育集团图书仓库管理系统</h2>
     <div class="login-top">
         <h1>LOGIN FORM</h1>
-<!--         <form method="post" action="" onsubmit="return checkForm()"> -->
-            <input type="text" name="username" value="" placeholder="username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Id';}" id="uname">
-            <input type="password" name="password" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="password" id="upwd" >
+            <input type="text" name="username" value="" placeholder="username"  id="uname">
+            <input type="password" name="password" value="" placeholder="password" id="upwd" >
             <p><span class="red msg"></span></p>
             <div class="forgot">
-                <a href="#" style="display:none;">forgot Password</a>
-                <input type="button" value="登录" onclick="checkForm();"  class="sub">
+                <a href="/index.php/login/registerView" >注册</a>
+                <!-- <input type="button" value="登录"  class="sub"> -->
             </div>
-<!--         </form> -->
     </div>
     <div class="login-bottom">
-        <h3><a href="/index.php/login/registerView">注册</a></h3>
+        <h3 onclick="checkForm();"  ><a href="javascript:void(0);" >登录 </a></h3>
     </div>
 </div>  
 <div class="copyright">
@@ -50,7 +48,7 @@ function checkForm() {
     $.ajax({
                 type:'POST',
                 url:'/index.php/login/login',
-                data:{name:name,pwd:pwd},
+                data:{username:name,password:pwd},
                 dataType:"json",
                 async:false,
                 cache:false,

@@ -48,7 +48,7 @@ body{
   -webkit-border-radius:  25px 25px 0px 0px;
   -moz-border-radius: 25px 25px 0px 0px;
   -o-border-radius: 25px 25px 0px 0px;
-  padding: 40px 60px;
+  padding: 20px 60px;
 }
 .login-top h1 {
   text-align: center;
@@ -94,7 +94,6 @@ body{
   font-weight: 500;
   color: #F45B4B;
   display: inline-block;
-  border-right: 2px solid #F45B4B;
   padding: 0px 7px 0px 0px;
 }
 .forgot  a:hover{
@@ -124,12 +123,41 @@ body{
   -moz-transition: 0.5s all;
   -o-transition: 0.5s all;
 }
+
+.forgot .sub{
+  background: #F45B4B;
+  color: #FFF;
+  font-size: 17px;
+  font-weight: 400;
+  padding: 8px 7px;
+  width: 20%;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 6px;
+  -webkit-border-radius: 19px;
+  -moz-border-radius: 6px;
+  -o-border-radius: 6px;
+  margin: 0px 7px 0px 3px;
+  outline: none;
+  border: none;
+}
+.forgot .sub:hover {
+  background:#818181;
+  transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+}
+.red{
+  color: red;
+}
+
 .forgot {
   text-align: right;
 }
 .login-bottom {
   background: #E15748;
-  padding: 30px 65px;
+  padding: 10px 15px;
   border-radius: 0px 0px 25px 25px;
   -webkit-border-radius:  0px 0px 25px 25px;
   -moz-border-radius: 0px 0px 25px 25px;
@@ -138,6 +166,7 @@ body{
   border-top: 2px solid #AD4337;
 }
 .login-bottom h3 {
+  text-align: center;
   font-size: 14px;
   font-weight: 500;
   color: #fff;
@@ -155,7 +184,7 @@ body{
   -o-transition: 0.5s all;
 }
 .copyright {
-  padding: 150px 0px 0px 0px;
+  padding: 30px 0px 0px 0px;
   text-align: center;
 }
 .copyright p {
@@ -317,7 +346,7 @@ body {
   margin:0px 0px 35px 0px;
 }
 .copyright {
-  padding: 75px 0px 0px 0px;
+  padding: 15px 0px 0px 0px;
 }
 }
 /*--meadia quiries end here--*/
