@@ -1,0 +1,5 @@
+<div>
+	<!-- 邮箱 -->
+	<input type="text" name="input_email" ng-class="{true: 'form-control input-m', false: 'form-control input-m input-error'}[active]" ng-model='ljvalue' ng-blur="ljf()" placeholder="{{defaultmsg}}"><!-- 错误提示框颜色class为input-error -->
+	<span class="input-span-error" ng-if='msg'>{{msg}}</span>
+</div>

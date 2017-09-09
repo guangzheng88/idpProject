@@ -1,0 +1,27 @@
+/*面包屑导航样式一（带有当前位置的）*/
+.breadcrumb-nav-a1 ul{
+	padding-left:0;
+	margin-bottom: 0;
+}
+.breadcrumb-nav-a1 li{
+	display: inline-block;
+	list-style: none;
+}
+.breadcrumb-nav-a1 a:hover,.breadcrumb-nav-a1 a{
+	color: #06c;
+}
+/*面包屑导航样式二*/
+.breadcrumb-nav-a2 ul{
+	padding-left:0;
+	margin-bottom: 0;
+}
+.breadcrumb-nav-a2 li{
+	display: inline-block;
+	list-style: none;
+}
+.breadcrumb-nav-a2 a{
+	color: #333;
+}
+.breadcrumb-nav-a2 a:hover{
+	color: #06c;
+}

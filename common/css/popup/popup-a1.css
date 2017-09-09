@@ -1,0 +1,68 @@
+.popup-modal{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: #000;
+	background-color:rgba(0,0,0,0.5);
+}
+.popup-a1{
+	width:324px;
+	border:2px solid #3d87c4;
+	text-align: center;
+	position:fixed;
+	top:50%;
+	margin-top: -109px;
+	left:50%;
+	margin-left:-162px;
+	background: #fff;
+}
+.popup-a1-prompt{
+	background: #3d87c4;
+	color: #fff;
+	padding:12px 0;
+}
+.popup-a1-content{	
+	padding:40px 0;
+}
+.popup-a1-content h4{
+	padding:0;
+}
+.popup-a1-text{
+	margin-bottom:45px;
+}
+.popup-a1-text span{	
+	margin-left:10px;
+	font-size: 18px;
+
+}
+.popup-a1-text span:before{
+	content: '';
+	display: inline-block;
+	width:19px;
+	height: 20px;
+	padding-right: 30px;
+	vertical-align: top;
+	margin-top: 1px;
+}
+/*操作失败颜色*/
+.popup-a1-failure{
+	color: #c00;
+}
+.popup-a1-failure:before{
+	background: url(../../images/operation_failure.png) no-repeat;
+	
+}
+/*操作成功颜色*/
+.popup-a1-success{
+	color: #090;
+}
+.popup-a1-success:before{
+	background: url(../../images/operation_success.png) no-repeat;
+}
+.popup-a1-link a{
+	text-decoration: underline;
+	color: #06c;
+}

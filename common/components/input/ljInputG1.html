@@ -1,0 +1,6 @@
+<!-- 手机号 -->
+<div>
+    <input type="text" ng-class="{true: 'form-control input-m', false: 'form-control input-m input-error '}[active]"  maxlength="{{len ||100}}" ng-model='ljvalue' ng-blur='ljf()' placeholder="{{place || ''}}">
+    <span class="input-span-error"  ng-if='msg'> {{msg}}</span>
+    <!-- 错误提示框颜色class为input-error -->
+</div>

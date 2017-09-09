@@ -1,0 +1,42 @@
+/*搜索框类型一样式*/
+.input-group .searchbox-a1-input{
+	width:180px;
+	height:27px;
+	margin-right:10px;
+	border-radius: 0;
+}
+.searchbox-a1-button{
+	width:54px;
+	height:27px;
+	line-height: 27px;
+	color: #fff;
+	background: #428BCA;
+	border:1px solid #357EBD;
+	padding:0;
+}
+.searchbox-a1-button:hover,.searchbox-a1-button:focus{
+	background: #3276B1;
+	color: #fff;
+}
+/*搜索框类型二样式（带搜索按钮）*/
+.input-group .searchbox-b1-input{
+	width:170px;
+	height:27px;
+	border-radius: 0;
+	border:1px solid #DEDEDE;
+}
+.searchbox-b1-input:focus{
+	border:1px solid #66afe9;
+}
+.searchbox-b1-span{
+	width:30px;
+	height:27px;
+	line-height: 27px;
+	text-align: center;
+	background: #F8F8F8;
+	color: #DCDCDC;
+	border:1px solid #DEDEDE;
+	border-left:none;
+	vertical-align: top;
+	margin-top: -1px;
+}

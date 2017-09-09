@@ -1,0 +1,32 @@
+@charset "utf-8";
+/* CSS Document */
+body,p,table,ul,ol,li,span,a,input,textarea,div,tr,th,td,img,select,form{
+    border:none;margin:0;padding:0;
+    }
+body{
+    font-size:12px; color:#000;font-family:"微软雅黑", "宋体", Arial;
+    }
+table{
+    border-collapse:collapse;background:#FFF;   
+    }
+li{
+    list-style-type:none;   
+    }
+/*头部*/
+.top{
+    height:76px;background:#FDFDFD;position:relative;color:#000;overflow:hidden;zoom:1;
+    }
+.lj-left .panel-group .panel + .panel{
+    margin-top: 3px;
+}
+.lj-left .panel-heading{
+    padding: 6px 15px;
+    margin: 1px 0px;
+}
+.lj-left .panel-heading:hover{
+    filter:alpha(opacity=80);opacity:0.8;
+    cursor:pointer;
+}
+.lj-left .list-group-item{
+    padding: 4px 15px;
+}

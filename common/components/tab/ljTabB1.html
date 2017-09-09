@@ -1,0 +1,24 @@
+<div>
+	<div class="commodity_nav">
+		<ul class="commodity_ul nav">
+			<li role="presentation" ng-class="{'commodity_active':$index==0}" ng-repeat="tabone in classifys['one_type']" ng-click="firstclassify({classifyone:$index})">
+				<a data-toggle="tab" href=".type{{$index}}">{{tabone.type_name}}</a>
+			</li>
+		</ul>
+	</div>
+	<div class="tab-content container-fluid commodityClassify">
+	  <div ng-class="{'tab-pane fade in active':$index==0,'tab-pane fade ':$index!=0}"  ng-repeat="classifyitem in classifys['two_types']" class='type{{$index}}'>
+	    <dl ng-repeat="classify in classifyitem" class="classify" >
+	      <dt>{{classify.two_type_name}}</dt>
+	      <dd ng-repeat="item in classify.types">
+	        <a href="{{typeurl}}/{{item.typeId}}">{{item.typeName}}</a>
+	      </dd>
+	    </dl>
+	  </div>
+	</div> 
+	<div id="go_top">  
+	    <a href="#">
+	    	<img src="{{gotopurl}}" width="60%" height="60%">
+	    </a>
+	</div>
+</div>

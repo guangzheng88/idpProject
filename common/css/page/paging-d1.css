@@ -1,0 +1,22 @@
+.paging-d1-rows a{
+	color:#333;
+	border:1px solid #ccc;
+	display: inline-block;
+	width:66px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	border-radius: 3px;
+	background: #f7f3f3;
+	cursor: pointer;
+}
+.paging-d1-rows .glyphicon{
+	color: #cccccc;
+	font-size: 8px;
+}
+.paging-d1-prev{
+	margin-right:5px;
+}
+.paging-d1-prev .glyphicon{
+	color:#ebb7ad;
+}

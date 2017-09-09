@@ -1,0 +1,6 @@
+<div class="radio radio-success">
+        <span class="radio-a1-span" ng-repeat='item in radios'>
+            <input type="radio" id="single{{item.id}}" ng-model="$parent.checkvalue"  name="ljRadioA1" ng-disabled="item.isd" ng-checked="item.isc"  value="{{item.value}}">
+            <label for="single{{item.id}}">{{item.name}}</label>
+        </span>
+</div>

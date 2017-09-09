@@ -1,0 +1,14 @@
+<div class="popup-modal" ng-if="loading === true" >
+    <div class="popup-a1">
+        <div class="popup-a1-prompt">系统提示</div>
+        <div class="popup-a1-content">
+            <div class="popup-a1-text">
+                <span class="popup-a1-failure" ng-if='msg.flag == "er"' >{{msg.info}}</span>
+                <span class="popup-a1-success " ng-if='msg.flag == "su"' >{{msg.info}}</span>
+            </div>
+            <div class="popup-a1-link" >
+                <span>{{sec}}</span>秒后自动跳转指定页面，<a ng-click="ljJump()" >点击跳转</a>
+            </div>
+         </div>
+    </div>
+</div>

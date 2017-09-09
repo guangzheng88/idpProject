@@ -1,0 +1,20 @@
+.paging-b1-rows{
+    display: inline-block;
+    color: #58A0D3;  
+}
+.paging-b1-rows a{
+    text-decoration: none;
+    color: #58A0D3;
+    padding: 2px 5px;
+    border: 1px solid #f0f0f0;
+    border-radius: 3px;
+    margin: 0 1px;
+    cursor: pointer;
+}
+
+.paging-b1-rows a.paging-b1-active{
+    background: #50A8E6;
+    border:1px solid #50A8E6;
+    color: #fff;
+    font-weight: 700;
+}

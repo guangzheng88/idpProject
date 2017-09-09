@@ -1,0 +1,18 @@
+<div class="popup-f1-modal" ng-if='ljshow === true'>
+    <div class="popup-f1">
+        <div class="popup-f1-title">
+            <h4 class="modal-title">提示</h4>
+        </div>
+        <div class="popup-f1-content">
+            <div class="popup-f1-text">
+                <span class="popup-f1-failure" ng-if='msgtip.flag == "er"'>{{msgtip.info}}</span>
+                <span class="popup-f1-success" ng-if='msgtip.flag == "su"'>{{msgtip.info}}</span>
+            </div>
+            <div>
+                <span>
+                    <button type="button" class="btn btn-c-s-common btn-blue-s" ng-click='ljf()'>确定</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

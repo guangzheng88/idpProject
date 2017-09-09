@@ -1,0 +1,5 @@
+<div>
+    <input type="text" ng-class="{true: 'form-control input-l', false: 'form-control input-l input-error'}[active]"  maxlength="70" ng-model='ljvalue' ng-blur="ljf()" placeholder="{{defaultmsg}}">
+    <span class="input-span-error"  ng-if='msg'> {{msg}}</span>
+    <!-- 错误提示框颜色class为input-error -->
+</div>

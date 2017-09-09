@@ -1,0 +1,26 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog popup-b1" role="document">
+        <div class="modal-content">
+            <div class="popup-b1-title">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">提示</h4>
+            </div>
+            <div class="popup-b1-content">
+                <div class="popup-b1-text" ng-if='msg'>
+                    {{msg}}
+                </div>
+                <div class="popup-b1-text" ng-if='!msg'>
+                    询问是否确定某个操作？
+                </div>
+                <div>
+                    <span class="popup-b1-btn">
+                        <button type="button" class="btn btn-c-s-common btn-blue-s" ng-click="ljf()" data-dismiss="modal" >确定</button>
+                    </span>
+                    <span>
+                        <button type="button" class="btn btn-c-s-common btn-white-s" data-dismiss="modal">取消</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

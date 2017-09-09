@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="/common/css/input/input.css">
+<div class="container">
+    <!-- 组件 lj-input-l-2 start -->
+    <h3><b>样式型号：</b> lj-input-l-2</h3>
+    <p><a href="/zip/ljInput/ljInputL2.zip"  download="ljInputL2.zip">点击下载</a></p>
+    <lj-input-l-1 msg='msgl' active='ljActivel' value='valuel' defaultmsg="请输入6-15位密码"></lj-input-l-1>
+    <br>
+    <lj-input-l-2 msgre='msgrell' activere='ljActiverell' valuere='valuerell' defaultmsgre="请重复输入密码" issame='1' valueold="{{valuel}}"></lj-input-l-2>
+    <br>
+    <button type="button"  class="btn btn-primary btn-md" ng-click='myFunRell()'>
+    保存
+    </button>
+    <h5><b>组件标签：</b></h5>
+<pre>
+    &lt;lj-input-l-2  msgre='msgrell' activere='ljActiverell' valuere='valuerell' defaultmsgre="请重复输入密码" issame='1'>&lt;/lj-input-l-2>
+</pre>    
+    <h5><b>组件说明：</b></h5>
+<pre>
+    1.msgre 变量: 错误提示信息
+    2.activere 变量:错误样式 active true 显示正确样式 false 显示错误样式
+    3.valuere 变量:绑定input 框输入的值
+    4:defaultmsgre input框默认提示信息，可以自行设置，也可以设置为空
+    5:issame 是否失去焦点验证两次输入密码的一致性 1：失去焦点验证 其他则视为不验证
+    6:valueold 第一个输入框输入的密码
+    7:该input组件框适用于要求重复输入密码的需求
+</pre>
+    <!-- 组件 lj-input-l-2 end -->
+</div>

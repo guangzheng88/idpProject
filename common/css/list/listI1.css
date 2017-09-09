@@ -1,0 +1,51 @@
+.listi-table{
+	min-width: 1024px;
+	border-right:none;
+	font-size: 14px;
+}
+.listi-table>thead>tr>th,.listi-table>tbody>tr>td{
+	text-align: center;
+	border-bottom: none;
+	border-top:none;
+	vertical-align: middle;
+	height: 36px;
+}
+.listi-table>thead>tr{
+	background-color: #bcbcbc;
+	color: #fff;
+}
+.listi-table>thead>tr>th{
+	border-right: 1px solid #E4E4E4;
+}
+.listi-table a{
+	color: #333;
+}
+.listi-table .listi-table-a-color{
+	color: #0066cc;
+	text-decoration: underline;
+	cursor: pointer;
+}
+.listi-table-a{
+	margin-right: 10px;
+}
+/*表格内容奇数行为白色*/
+.listi-table>tbody>tr:nth-child(odd){
+	background-color: #fff;
+}
+/*表格内容偶数行为淡蓝色*/
+.listi-table>tbody>tr:nth-child(even){
+	background-color: #DAE9F5;
+}
+/*券状态的颜色*/
+.listi-table .used{ 
+	color:#f60;
+}
+.listi-table .issued{
+	color:#008000;
+}
+.listi-table .expired{
+	color:#8B0000;
+}
+.listi-table .cancellation{
+	color:#F338F3;
+}
