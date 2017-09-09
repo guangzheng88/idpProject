@@ -1,0 +1,27 @@
+.tab_c ul{
+	display: flex;
+	width: 100%;
+	padding:0;
+	border-left:1px solid #797979;
+}
+.tab_c ul li{
+	display: inline-block;
+	width: 20%;
+	text-align: center;
+	list-style: none;
+	border:1px solid #797979;
+	border-left:none;
+}
+.tab_c li a{
+	display: inline-block;
+	color: #333;
+	padding:10px 0;
+	width: 100%;
+}
+.tab_c li a.active{
+	background:#E4E4E4;
+	color: #0033FF;
+}
+.tab_c li a:link{
+	text-decoration: none;
+}

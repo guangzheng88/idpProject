@@ -1,0 +1,12 @@
+.popup-d1-content{
+	position: fixed;
+	top:10px;	
+	text-align: center;
+	left:50%;
+	margin-left:-225px;
+	display:block;
+}
+.popup-d1{
+	width:450px;
+	padding:14px 10px;
+}

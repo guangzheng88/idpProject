@@ -1,0 +1,46 @@
+/*****************************日期组件******************************************/
+/*.date_width
+{
+	width: 260px;
+	height:27px;
+}*/
+.input-group .input_width 
+{
+	display: inline-block;
+	width: 180px;
+	height:30px;
+}
+.span_width
+{
+	display: inline-block;
+	width: 40px;
+	height: 30px;
+}
+.date_bg_btn,.date_bg_btn[readonly]{
+	background: #fbfafa;
+	border:1px solid #435d7d;
+	color:#313131;
+}
+.dateInfo{
+	color: #f00;
+	margin-left:10px;
+}
+/*时间控件b1*/
+.inputTimeb1
+{
+	width:180px;
+	height:27px; 
+	margin-right:10px;
+}
+/*时间控件输入框样式b3*/
+.inputTimeb3
+{
+	width:180px;
+	height:27px; 
+	margin-right:20px;
+}
+/*时间控件名称样式*/
+.startTime
+{
+	margin-right: 10px;
+}

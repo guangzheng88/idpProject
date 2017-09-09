@@ -1,0 +1,31 @@
+.new_list_right{
+	float:right;
+	color:#b4de9f;
+	font-size: 0.4rem;
+	line-height: 1;
+}
+.newList li{
+	border:1px solid #f4f4f4;
+	line-height: 1.5;
+}
+.newList li:last-child{
+	border-bottom-right-radius: 0; 
+    border-bottom-left-radius: 0; 
+}
+.newList li:first-child{
+	border-top-left-radius: 0;
+     border-top-right-radius: 0; 
+}
+.newList a,.newList a:hover{
+	color:#555;
+	text-decoration: none;
+}
+/*新闻资讯列表组件------end*/
+/*返回到顶部样式----start*/
+#go_top{
+	position:fixed; 
+	right: 0;
+	bottom:0.5rem;
+	text-align: center;
+} 
+/*返回到顶部样式----end*/
