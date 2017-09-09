@@ -2,7 +2,7 @@
 
 /**
  * Created by zlp on 2017/03/12
- * 蓝景丽家公共服务
+ * 图书管理公共服务
  */
 var ljHelper = angular.module('ljHelper', []);
 
