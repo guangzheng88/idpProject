@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/common/css/button/buttonS.css">
+<link rel="stylesheet" href="/common/css/popup/popup-b1.css">
+
+<div class="container">
+   <!-- 组件 lj-prompt-b-1 start -->
+    <h3><b>样式型号：</b> lj-prompt-b-1</h3>
+       <p><a href="/zip/ljPrompt/ljPromptB1.zip" download="ljPromptB1.zip">点击下载</a></p>
+<button type="button" class="btn btn-primary btn-lg" ng-click="del('123')" data-toggle="modal" data-target="#myModal" >
+          点击按钮
+</button>
+        <lj-prompt-b-1 msg='promptMsg' ljf='promptFun()'></lj-prompt-b-1>
+<hr>
+
+
+    <h5><b>组件标签：</b></h5>
+<pre>
+    &lt;lj-prompt-b-1  msg='promptMsg' ljf='promptFun()' > &lt;/lj-prompt-b-1>
+</pre>    
+    <h5><b>组件说明：</b></h5>
+<pre>
+    1.msg : 询问框提示信息。
+    2.ljf : 点击确认绑定方法。
+    3.由于询问框涉及到事件触发。必须在点击元素上添加两个属性
+        1）data-toggle="modal"
+        2）data-target="#myModal"
+        例如：
+            &lt;button data-toggle="modal" data-target="#myModal" > 点击按钮&lt;/button>
+    4.此询问框只有在点击事件下触发。
+</pre>
+<!-- 组件 lj-prompt-b-1end -->
+</div>

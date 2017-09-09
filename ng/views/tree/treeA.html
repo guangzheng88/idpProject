@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="/common/css/tree/tree-control.css">
+<link rel="stylesheet" href="/common/css/tree/tree-control-attribute.css">
+
+<style type="text/css">
+    treecontrol.tree-classic li.tree-expanded i.tree-branch-head
+    {
+        padding: 0px 10px;
+        background: url({{openurl}}) no-repeat; 
+    }
+    treecontrol.tree-classic li.tree-collapsed i.tree-branch-head {
+       	padding: 0px 10px;
+        background: url({{closeurl}}) no-repeat;
+    }
+    treecontrol.tree-classic li.tree-leaf i.tree-leaf-head {
+        padding: 0px 10px;
+        background: url({{fileurl}}) no-repeat;
+    }
+</style>
+<div class="container">
+    <!-- 组件 treecontrol start -->
+    <h3><b>样式型号：</b> lj-tree-a</h3>
+    <p><a href="/zip/ljTree/ljTreeA.zip"  download="ljTreeA.zip">点击下载</a></p>
+        <treecontrol class="tree-classic"
+           tree-model="dataForTheTree"
+           options="treeOptions">
+           {{node.moduleName}}&nbsp;&nbsp;[<a href="{{addChildUrl}}{{node.id}}">添加子分类</a>][<a href="{{modChildUrl}}{{node.id}}">修改</a>][<a href="{{delChildUrl}}{{node.id}}">删除</a>]
+        </treecontrol>
+    <h5><b>组件标签：</b></h5>
+<pre>
+    &lt;treecontrol class="tree-classic" tree-model="dataForTheTree" options="treeOptions">&lt;/treecontrol>
+</pre>    
+    <h5><b>组件说明：</b></h5>
+<pre>
+    1.tree-model 树结构的内容
+    2.options 树结构的配置选项，一般情况不用修改
+    3.openurl 树结构根节点的显示图片 打开状态(这个图片是可以自己从controller里面自定义设置的)
+    4.closeurl 树结构根节点的显示图片 关闭状态(这个图片是可以自己从controller里面自定义设置的)
+</pre>
+<!-- 组件 treecontrol end -->
+</div>

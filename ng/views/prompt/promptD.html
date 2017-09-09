@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="/common/css/popup/popup-d1.css">
+<div class="container">
+   <!-- 组件 lj-prompt-b-1 start -->
+    <h3><b>样式型号：</b> lj-popup-d-1</h3>
+       <p><a href="/zip/ljPrompt/ljPromptD1.zip" download="ljPromptD1.zip">点击下载</a></p>
+
+<button type="button" class="btn btn-primary btn-md" ng-click='show1()'>
+          点击(成功)
+</button>
+<button type="button" class="btn btn-primary btn-md" ng-click='show2()'>
+          点击(警告)
+</button>
+<button type="button" class="btn btn-primary btn-md" ng-click='show3()'>
+          点击(危险)
+</button>
+
+        <lj-prompt-d-1 ljshow='ljshow' msg='msgInfo' ljstyle='ljstyle' ></lj-prompt-d-1>
+    <hr>
+    <h5><b>组件标签：</b></h5>
+<pre>
+    &lt;lj-prompt-d-1 ljshow='ljshow' msg='msgInfo' ljstyle='ljstyle' >&lt;/lj-prompt-d-1>
+</pre>    
+    <h5><b>组件说明：</b></h5>
+<pre>
+    1.ljshow : 变量 是否显示提示信息 默认false
+    2.msg : 变量 提示信息。
+    3.ljstyle 变量 样式设置。 三种样式：success(成功) warning(警告) danger(危险)
+</pre>
+<!-- 组件 lj-prompt-b-1end -->
+</div>
