@@ -1,9 +1,9 @@
-<!DOCTYPE HTML>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE HTML>
 <html>
 <head>
 <title>登录系统</title>
 <!-- Custom Theme files -->
-<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="/Public/css/style.css" rel="stylesheet" type="text/css" media="all"/>
 <!-- Custom Theme files -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">

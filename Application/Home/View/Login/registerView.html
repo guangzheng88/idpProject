@@ -23,15 +23,16 @@
 <!--         <form method="post" action="" onsubmit="return checkForm()"> -->
             <input type="text" name="username" value="" placeholder="username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Id';}" id="uname">
             <input type="password" name="password" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="password" id="upwd" >
+            <input type="password" name="password" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="password" id="rpwd" >
             <p><span class="red msg"></span></p>
             <div class="forgot">
                 <a href="#" style="display:none;">forgot Password</a>
-                <input type="button" value="登录" onclick="checkForm();"  class="sub">
+                <input type="button" value="注册" onclick="checkForm();"  class="sub">
             </div>
 <!--         </form> -->
     </div>
     <div class="login-bottom">
-        <h3><a href="/index.php/login/registerView">注册</a></h3>
+        <h3><a href="/index.php/index/index">登录</a></h3>
     </div>
 </div>  
 <div class="copyright">
@@ -43,13 +44,19 @@ function checkForm() {
     $('.msg').html('');
     var name = $("#uname").val();
     var pwd = $("#upwd").val();
+    var rpwd = $("#rpwd").val();
+
     if (!pwd || !name) {
         $('.msg').html('用户名或密码不能为空');
         return false;
     }
+    if (pwd !=rpwd) {
+        $('.msg').html('密码两次输入不一致');
+        return false;
+    }
     $.ajax({
                 type:'POST',
-                url:'/index.php/login/login',
+                url:'/index.php/login/register',
                 data:{name:name,pwd:pwd},
                 dataType:"json",
                 async:false,

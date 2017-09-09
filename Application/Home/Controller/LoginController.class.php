@@ -27,7 +27,15 @@ class LoginController extends Controller {
         $this->ajaxReturn($result);
     }
     /**
-     * 用户注册
+     * 用户注册,视图
+     */
+    public function registerView()
+    {
+       $this->display();
+    }
+
+    /**
+     * 用户注册,入库
      */
     public function register()
     {
