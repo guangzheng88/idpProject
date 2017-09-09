@@ -19,7 +19,7 @@
     <h2>IDP教育集团图书仓库管理系统</h2>
     <div class="login-top">
         <h1>LOGIN FORM</h1>
-        <form method="post" action="/index.php/Home/Index/submit">
+        <form method="post" action="/index.php/login/login">
             <input type="text" name="username" value="" placeholder="username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Id';}">
             <input type="password" name="password" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="password">
             <div class="forgot">
