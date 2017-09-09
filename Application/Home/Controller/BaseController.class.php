@@ -27,7 +27,7 @@ class BaseController extends Controller {
             M('auth')->data($auth)->add();
         }
         //验证权限
-        if($userinfo['username'] != 'admin')
+        if($this->userinfo['username'] != 'admin')
         {
             $authRes = $this->checkAuth($auth['class_name']);
             if(!$authRes)
@@ -43,7 +43,6 @@ class BaseController extends Controller {
      */
     public function checkAuth($className='')
     {
-        $userinfo = session('userinfo');
         $map['id'] = $this->userinfo['role_id'];
         $roleArr = M('role')->where($map)->find();
         $idsArr = explode(',', $roleArr['auth_ids']);
