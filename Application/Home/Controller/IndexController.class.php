@@ -12,7 +12,7 @@ class IndexController extends Controller {
             $result['status'] = 0;
             $result['isLogin'] = 0;
             $result['error'] = '用户未登录';
-            $this->ajaxReturn($result);
+            $this->redirect('login/index');
         }
     }
     /**
@@ -23,6 +23,7 @@ class IndexController extends Controller {
     }
     public function top()
     {
+        $this->assign('userinfo',$this->userinfo);
         $this->display();
     }
     public function left()

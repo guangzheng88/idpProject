@@ -79,4 +79,12 @@ class LoginController extends Controller {
         }
         return false;
     }
+    /**
+     * 退出
+     */
+    public function loginOut()
+    {
+        session('userinfo',null);
+        $this->redirect('login/index');
+    }
 }
