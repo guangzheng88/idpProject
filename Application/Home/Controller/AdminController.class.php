@@ -5,26 +5,68 @@ use Home\Controller\BaseController;
 class AdminController extends BaseController {
     public function __construct()
     {
-        $auth['title'] = '后台首页';
+        $auth['title'] = '权限管理';
         $auth['class_name'] = __CLASS__;
         parent::__construct($auth);
     }
     /**
-     * 后台首页
+     * 审核用户
      */
-    public function index(){
-        $this->display();
-    }
-    public function top()
+    public function auditAdmin()
     {
-        $this->display();
+        $data['status'] = I('status',0,'intval');
+        $res = M('admin')->where(array('id'=>I('id')))->data($data)->save();
+        if($res)
+        {
+            $result['status'] = 1;
+        }else
+        {
+            $result['status'] = 0;
+            $result['error'] = '审核失败';
+        }
+        $this->ajaxReturn($result);
     }
-    public function left()
+    /**
+     * 用户列表
+     */
+    public function getList()
     {
-        $this->display();
+        $limit = I('limit',10,'intval');
+        $offset = I('offset',0,'intval');
+        $map['username'] = array('neq','admin');
+        $res['count'] = M('admin')->where($map)->limit($limit,$offset)->count();
+        $row = M('admin')->where($map)->limit($limit,$offset)->select();
+        $res['status'] = 1;
+        $res['list'] = $row;
+        $this->ajaxReturn($res);
     }
-    public function main()
+    /**
+     * 获取角色列表
+     */
+    public function getRole()
     {
-        $this->display();
+        $role = M('role')->select();
+        $res['status'] = 1;
+        $res['list'] = $role;
+        $this->ajaxReturn($res);
+    }
+    /**
+     * 给用户添加角色
+     * @param id 用户id
+     * @param roleId 角色id
+     */
+    public function addAdminRole()
+    {
+        $data['role_id'] = I('roleId');
+        $res = M('admin')->where(array('id'=>I('id')))->data($data)->save();
+        if($res)
+        {
+            $result['status'] = 1;
+        }else
+        {
+            $result['status'] = 0;
+            $result['error'] = '操作失败';
+        }
+        $this->ajaxReturn($result);
     }
 }

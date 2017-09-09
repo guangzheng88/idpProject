@@ -5,7 +5,7 @@ use Home\Controller\BaseController;
 class CategoryController extends BaseController {
     public function __construct()
     {
-        $auth['title'] = '图书分类管理';
+        $auth['title'] = '分类管理';
         $auth['class_name'] = __CLASS__;
         parent::__construct($auth);
     }
@@ -13,9 +13,13 @@ class CategoryController extends BaseController {
      * 分类列表
      */
     public function getList(){
-        $data = M('category')->select();
-        $data['status'] = 1;
-        $this->ajaxReturn($data);
+        $limit = I('limit',10,'intval');
+        $offset = I('offset',0,'intval');
+        $res['count'] = M('category')->limit($limit,$offset)->count();
+        $data = M('category')->limit($limit,$offset)->select();
+        $res['status'] = 1;
+        $res['list'] = $data;
+        $this->ajaxReturn($res);
     }
     /**
      * 添加分类

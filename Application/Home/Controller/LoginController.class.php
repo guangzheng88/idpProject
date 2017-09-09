@@ -3,6 +3,13 @@ namespace Home\Controller;
 use Think\Controller;
 class LoginController extends Controller {
     /**
+     * 登录页
+     */
+    public function index()
+    {
+        $this->display();
+    }
+    /**
      * 用户登录
      */
     public function login()
