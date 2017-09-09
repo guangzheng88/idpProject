@@ -5,7 +5,7 @@ use Home\Controller\BaseController;
 class AdminController extends BaseController {
     public function __construct()
     {
-        $auth['title'] = '销售管理';
+        $auth['title'] = '后台首页';
         $auth['class_name'] = __CLASS__;
         parent::__construct($auth);
     }
