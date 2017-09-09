@@ -85,6 +85,8 @@ class LoginController extends Controller {
     public function loginOut()
     {
         session('userinfo',null);
-        $this->redirect('login/index');
+        echo '<script>';
+        echo 'top.window.location.href=/index.php/login';
+        echo '</script>';
     }
 }
