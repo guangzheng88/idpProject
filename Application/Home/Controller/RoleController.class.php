@@ -72,10 +72,9 @@ class RoleController extends BaseController {
      */
     public function updateAuth()
     {
-        $ids = trim(I('ids'),',');
         $id = I('id',0,'intval');
-        $data['auth_ids'] = implode(',', $ids);
-        $res = M('role')->data($data)->where(array('id'=>$id))->save();
+        $data['auth_ids'] = trim(I('ids'),',');
+        if($data['auth_ids']) $res = M('role')->data($data)->where(array('id'=>$id))->save();
         if($res)
         {
             $result['status'] = 1;
