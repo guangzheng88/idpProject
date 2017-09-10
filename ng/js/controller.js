@@ -560,13 +560,14 @@ $scope.main();
 
 
 /**
- * userListCtrl
+ * userListCtrl 用户
  */
 ctrls.controller('userListCtrl',['$scope','$http','$routeParams',function($scope,$http,$routeParams){
   $scope.limit = 10;
   $scope.offset = 0;
   $scope.count = 0;
   $scope.role = [];
+  $scope.adminId = 0;
   //表头内容
   $scope.titleArr = {
       th1:{name:'ID',width:'14%'},
@@ -590,12 +591,8 @@ ctrls.controller('userListCtrl',['$scope','$http','$routeParams',function($scope
 //       {id:4,value:'r4',name:'选项4',isd:false,isc:false},
 //       {id:5,value:'r5',name:'选项5',isd:false,isc:false},
 //     ]
-  $scope.checkValue='r2';//默认选中值 如果没有 $scope.checkValue='';
-  //myClick 方法获取 选中数据
-  $scope.myClick = function(){
-      alert('你选中的是:'+$scope.checkValue);
-      console.log('你选中的是:'+$scope.checkValue);
-  }
+  $scope.checkValue='';//默认选中值 如果没有 $scope.checkValue='';
+
 
     //点击  出售操作  触发
     $scope.fun1 = function(fs)
@@ -635,16 +632,33 @@ ctrls.controller('userListCtrl',['$scope','$http','$routeParams',function($scope
     //点击  出售操作  触发
     $scope.fun2 = function(fs)
     {
-          //alert('出售操作，id为:'+fs.id);
+          $scope.checkValue=fs.role_id;
+          $scope.adminId=fs.id;
           $(".libmodal").show();
     }
 
     $scope.secFun = function(){
       $(".libmodal").hide();
     }
-     // 售出确定
+     // 确定
       $scope.saveFun = function(){
         $(".libmodal").hide();
+         $http({
+                method: 'POST',
+                url: "/index.php/admin/addAdminRole", 
+                data:{
+                    'id':$scope.adminId,
+                    'roleId':$scope.checkValue
+                }
+            }).success(function(response, status, headers, config) {
+                if(response.status == '1')
+                {
+                  alert('操作成功!');
+                  window.location.reload();
+                }else{
+                  alert('操作失败!');
+                }
+            });
       }
 
 
@@ -680,6 +694,11 @@ ctrls.controller('userListCtrl',['$scope','$http','$routeParams',function($scope
                     }
                     $scope.listArr = response.list;
                     $scope.count = response.count;
+                    //console.log(response.role);
+                    for (var i = 0; i < response.role.length; i++) {
+                      response.role[i].name = response.role[i].title;
+                      response.role[i].value = response.role[i].id;
+                    }
                     $scope.role = response.role;
 
                   }else{
@@ -720,13 +739,6 @@ ctrls.controller('roleListCtrl',['$scope','$http','$routeParams',function($scope
       fun1Name:'修改权限'
     };
     $scope.checks = [];
-    // $scope.checks = [
-    //   {id:1,name:'管理员',isDisabled:'',done:false},
-    //   {id:2,name:'店员',isDisabled:'',done:false},
-    //   {id:3,name:'其他1',isDisabled:'',done:false},
-    //   {id:4,name:'其他2',isDisabled:'',done:false},
-    //   {id:5,name:'其他3',isDisabled:'',done:false},
-    // ]
     //myClick 方法获取 选中数据
     $scope.myClick = function(){
         angular.forEach($scope.checks, function (item) {
@@ -740,6 +752,14 @@ ctrls.controller('roleListCtrl',['$scope','$http','$routeParams',function($scope
     {
           //alert('出售操作，id为:'+fs.id);
           $scope.saveId = fs.id;
+           var idsArr =[];
+           idsArr =fs.auth_ids.split(",");
+          for (var i = 0; i < $scope.checks.length; i++) {
+                $scope.checks[i].done = false;
+                for (var k = 0; k < idsArr.length; k++) {
+                  if (idsArr[k] == $scope.checks[i].id) {$scope.checks[i].done = true}
+                }
+          }
           $(".libmodal").show();
    
     }
@@ -850,252 +870,3 @@ ctrls.controller('roleListCtrl',['$scope','$http','$routeParams',function($scope
 ctrls.controller('lCtrl',['$scope','$routeParams',function($scope,$routeParams){
   //alert('left');
 }])
-/**
- * right
- */
-ctrls.controller('right',['$scope','$routeParams',function($scope,$routeParams){
-  //alert('right');
-}])
-
-/**
- * 控制器  按钮组件A
- * @author : yanglijun
- * @date : 2017-02-27
- */
-ctrls.controller('buttonACtrl',['$scope','$timeout','$routeParams',function($scope,$timeout,$routeParams){
-    /* --- 测试数据 start ---------------*/
-    $scope.a1bDisabled = false;//按钮是否禁用
-    $scope.a1bFun = function(){
-        $scope.a1bDisabled = true;
-        $timeout(function(){
-              console.log('执行$timeout回调');
-              $scope.a1bDisabled =  false
-          },3000);
-    }
-    $scope.a1wDisabled = false;//按钮是否禁用
-    $scope.a1wFun = function(){
-        $scope.a1wDisabled = true;
-        $timeout(function(){
-              console.log('执行$timeout回调');
-              $scope.a1wDisabled =  false
-          },3000);
-    }
-    $scope.a1gDisabled = false;//按钮是否禁用
-    $scope.a1gFun = function(){
-        $scope.a1gDisabled = true;
-        $timeout(function(){
-              console.log('执行$timeout回调');
-              $scope.a1gDisabled =  false
-          },3000);
-    }
-    /* --- 测试数据  end ---------------*/ 
-}])
-/**
- * 控制器  按钮组件B
- * @author : yanglijun
- * @date : 2017-02-27
- */
-ctrls.controller('buttonBCtrl',['$scope','$timeout','$routeParams',function($scope,$timeout,$routeParams){
-    /* --- 测试数据 start ---------------*/
-    $scope.b1bDisabled = false;//按钮是否禁用
-    $scope.b1bFun = function(){
-        $scope.b1bDisabled = true;
-        $timeout(function(){
-              console.log('执行$timeout回调');
-              $scope.b1bDisabled =  false
-          },3000);
-    }
-    $scope.b1wDisabled = false;//按钮是否禁用
-    $scope.b1wFun = function(){
-        $scope.b1wDisabled = true;
-        $timeout(function(){
-              console.log('执行$timeout回调');
-              $scope.b1wDisabled =  false
-          },3000);
-    }
-    $scope.b1gDisabled = false;//按钮是否禁用
-    $scope.b1gFun = function(){
-        $scope.b1gDisabled = true;
-        $timeout(function(){
-              console.log('执行$timeout回调');
-              $scope.b1gDisabled =  false
-          },3000);
-    }
-    /* --- 测试数据  end ---------------*/ 
-}])
-
-/**
- * 控制器  按钮组件C
- * @author : zlp
- * @date : 2017-02-24
- */
-ctrls.controller('buttonCCtrl',['$scope','$timeout','$routeParams',function($scope,$timeout,$routeParams){
-    /* --- 测试数据 start ---------------*/
-    $scope.c1bDisabled = true;//按钮是否禁用
-    $scope.c1bFun = function(){
-        $scope.c1bDisabled = false;
-        $timeout(function(){
-              console.log('执行$timeout回调');
-              $scope.c1bDisabled =  true
-          },3000);
-    }
-    $scope.c1wDisabled = true;//按钮是否禁用
-    $scope.c1wFun = function(){
-        $scope.c1wDisabled = false;
-        $timeout(function(){
-              console.log('执行$timeout回调');
-              $scope.c1wDisabled =  true
-          },3000);
-    }
-    $scope.c1gDisabled = true;//按钮是否禁用
-    $scope.c1gFun = function(){
-        $scope.c1gDisabled = false;
-        $timeout(function(){
-              console.log('执行$timeout回调');
-              $scope.c1gDisabled =  true
-          },3000);
-    }
-    /* --- 测试数据  end ---------------*/ 
-}])
-
-/**
- * 控制器  按钮组件C
- * @author : zlp
- * @date : 2017-02-24
- */
-ctrls.controller('buttonDCtrl',['$scope','$timeout','$routeParams',function($scope,$timeout,$routeParams){
-    /* --- 测试数据 start ---------------*/
-    $scope.d1Disabled = true;//按钮是否禁用
-    $scope.d1Fun = function(){
-        $scope.d1Disabled = false;
-        $timeout(function(){
-              console.log('执行$timeout回调');
-              $scope.d1Disabled =  true
-          },3000);
-    }
-    $scope.d2Disabled = true;//按钮是否禁用
-    $scope.d2Fun = function(){
-        $scope.d2Disabled = false;
-        $timeout(function(){
-              console.log('执行$timeout回调');
-              $scope.d2Disabled =  true
-          },3000);
-    }
-    /* --- 测试数据  end ---------------*/ 
-}])
-
-
-/*
-* 列表样式A lj-list-a-1
-* author:yanglijun
-* date:2017-02-27
-*/
-ctrls.controller('listACtrl',['$scope','$routeParams',function($scope,$routeParams){
-    /* --- 测试数据 start ---------------*/
-    //表头内容
-    $scope.titleArr = {
-    th1:{name:'序号',width:'8%'},
-    th2:{name:'展位号',width:'15%'},
-    th3:{name:'商户名称',width:'30%'},
-    th4:{name:'品牌',width:'13%'},
-    th5:{name:'销售额',width:'14%'},//th5 为右对齐 如果页面不要屏蔽此行并且 删除$scope.listArr.td5
-    // th6:{name:'操作人',width:'20%'},
-    // th7:{name:'k代码',width:'10%'},
-    // th8:{name:'商户电话',width:'10%'},
-    operation:{name:'操作',width:'20%'},
-    }
-    //列表内容 从数据库获取数据然后转换
-    $scope.listArr = [
-    {id:'1',td2:'A-001-001',td3:'华鹤集团有限公司',td4:'华鹤',td5:'1462204.00',td6:'张',td7:'k100298',td8:'61366725'},
-    {id:'2',td2:'',td3:'北京华日家具有限公司',td4:'',td5:'142422.00',td6:'张',td7:'k100298',td8:'61366725'},
-    {id:'3',td2:'A-001-003',td3:'北京圣华家具家居建材销售有限公司',td4:'圣华',td5:'1462204.00',td6:'张',td7:'k100298',td8:'61366725'},
-    {id:'4',td2:'A-001-004',td3:'',td4:'华丰',td5:'413343.00',td6:'张',td7:'k100298',td8:'61366725'},
-    {id:'5',td2:'A-001-005',td3:'北京新发圣家具有限公司',td4:'绿之岛',td5:'',td6:'张',td7:'k100298',td8:'61366725'},
-    ];   
-    
-    //操作显示内容
-    $scope.operations = {
-      fun1Name:'查看',
-      fun2Name:'修改',
-      fun3Name:'删除',
-      fun4Name:"审核"
-    };
-    //点击详情触发
-    $scope.fun1 = function(fs)
-    {
-      alert('查看操作，id为:'+fs.id);
-    }
-    //点击修改触发
-    $scope.fun2 = function(fs)
-    {
-      alert('修改操作，id为:'+fs.id)
-    }
-    //点击删除触发
-    $scope.fun3 = function(fs)
-    {
-      alert('删除操作，id为'+fs.id);
-    }
-    //点击审核操作触发
-    $scope.fun4 = function(fs)
-    {
-      alert('审核操作，id为'+fs.id);
-    }
-    /* --- 测试数据  end ---------------*/ 
-}])
-/*
-* 列表样式B lj-list-b-1
-* author:yanglijun
-* date:2017-02-28
-*/
-ctrls.controller('listBCtrl',['$scope','$routeParams',function($scope,$routeParams){
-  //表头内容
-  $scope.titleArr = {
-  th1:{name:'批次编号',width:'20%'},
-  th2:{name:'券名称',width:'18%'},
-  th3:{name:'券类型',width:'10%'},
-  th4:{name:'面额(元)',width:'10%'},
-  th5:{name:'添加日期',width:'10%'},
-  // th6:{name:'操作人',width:'25%'},
-  // th7:{name:'操作人1',width:'10%'},
-  // th8:{name:'操作人1',width:'10%'},
-  operation:{name:'操作',width:'32%'},
-  }
-  //列表内容 从数据库获取数据然后转换
-  $scope.listArr = [
-  {id:'1',td1:'LJB201702160000011',td2:'新春优惠打折促销券',td3:'优惠券',td4:'1000',td5:'2017-02-11',td6:'zhang',td7:'zhang'},
-  {id:'2',td1:'LJB201702160000012',td2:'',td3:'优惠券',td4:'300',td5:'2017-03-09',td6:'zhang',td7:'zhang'},
-  {id:'3',td1:'LJB201702160000013',td2:'十一金秋大优惠',td3:'优惠券',td4:'200',td5:'2017-03-12',td6:'zhang',td7:'zhang'},
-  {id:'4',td1:'LJB201702160000014',td2:'端午促销',td3:'',td4:'900',td5:'2017-01-21',td6:'zhang',td7:'zhang'},
-  {id:'5',td1:'LJB201702160000015',td2:'元旦折扣上上上',td3:'优惠券',td4:'',td5:'2017-02-11',td6:'zhang',td7:'zhang'},
-  ];   
-    
-  //操作显示内容
-  $scope.operations = {
-    fun1Name:'券查看',
-    fun2Name:'基本属性设置',
-    fun3Name:'黑名单设置',
-    fun4Name:"删除"
-  };
-  //点击基本属性设置触发
-  $scope.fun1 = function(fs)
-  {
-    alert('券查看操作,id为:'+fs.id);
-  }
-  //点击黑名单设置触发
-  $scope.fun2 = function(fs)
-  {
-    alert('基本属性设置操作,id为:'+fs.id)
-  }
-  //点击黑名单设置 fun3触发
-  $scope.fun3 = function(fs)
-  {
-    alert('黑名单设置操作,id为:'+fs.id);
-  }
-  //点击删除操作 fun4触发
-  $scope.fun4 = function(fs)
-  {
-    alert('点击删除操作,id为:'+fs.id);
-  }
-  /* --- 测试数据  end ---------------*/ 
-}])
-
