@@ -18,6 +18,14 @@ when('/booksList', {
         controller: 'booksAuditingCtrl',  
         templateUrl: renovateUrl('views/books/booksAuditing.html')
     }).
+when('/user', {
+        controller: 'userListCtrl',
+        templateUrl: renovateUrl('views/user/userList.html')
+    }).
+when('/role', {
+        controller: 'roleListCtrl',
+        templateUrl: renovateUrl('views/role/roleList.html')
+    }).
     otherwise({
         redirectTo: '/classify'
     });
