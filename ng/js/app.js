@@ -26,6 +26,11 @@ when('/role', {
         controller: 'roleListCtrl',
         templateUrl: renovateUrl('views/role/roleList.html')
     }).
+when('/sell', {
+    controller: 'sellListCtrl',
+    templateUrl: renovateUrl('views/sell/sellList.html')
+}).
+
     otherwise({
         redirectTo: '/classify'
     });

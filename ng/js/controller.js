@@ -438,7 +438,7 @@ $scope.max_num = '';
     //追加选项
     $scope.selectArrm = $scope.selectArrm.concat(datas);
 
-  //搜索
+  //
   $scope.addFun = function(){
     $scope.main();
   }
@@ -452,9 +452,8 @@ $scope.max_num = '';
       th5:{name:'售价',width:'9%'},
       th6:{name:'进价',width:'9%'},
       th7:{name:'作者',width:'9%'},
+      th8:{name:'剩余库存',width:'9%'},
       th9:{name:'出版社',width:'9%'},
-      th9:{name:'剩余库存',width:'9%'},
-      th10:{name:'出版社',width:'9%'},
       operation:{name:'操作',width:'12%'}
   }
   $scope.listArr = [];   
@@ -478,6 +477,7 @@ $scope.secFun = function(){
 }
  // 售出确定
   $scope.saveFun = function(){
+
     $(".libmodal").hide();
     if ($scope.max_num < $scope.svalue) {
           alert('库存不足!');
@@ -862,6 +862,82 @@ ctrls.controller('roleListCtrl',['$scope','$http','$routeParams',function($scope
         alert('不可为空!');
     }
   }
+}])
+
+
+
+/**
+ * sellListCtrl 销售
+ */
+ctrls.controller('sellListCtrl',['$scope','$http','$routeParams',function($scope,$http,$routeParams){
+
+  $scope.limit = 10;
+  $scope.offset = 0;
+  $scope.count = 0;
+
+ //表头内容
+  $scope.titleArr = {
+      th1:{name:'ID',width:'15%'},
+      th2:{name:'图书名称',width:'15%'},
+      th3:{name:'售价',width:'15%'},
+      th4:{name:'数量',width:'15%'},
+      th5:{name:'总金额',width:'15%'},
+      th6:{name:'出售时间',width:'25%'}
+  }
+  $scope.listArr = [];   
+    
+//操作显示内容
+    $scope.operations = {};
+//点击  出售操作  触发
+$scope.fun1 = function(fs)
+{
+  
+}
+
+ $scope.main = function(){
+           var p =  $http({
+              method: 'POST',
+              url: "/index.php/sell/index", 
+              data:{
+                  'name':$scope.name,
+                  'cate':$scope.cate,
+                  'status':$scope.status,
+                  'limit':$scope.limit,
+                  'offset':$scope.offset,
+              }
+          });
+           p.success(function(response, status, headers, config) {
+
+            console.log(response);
+
+            if (response.isLogin == 0){
+                alert('登录状态丢失');
+                top.window.location.href="/index.php/login";
+            }
+              if(response.status == '1')
+              {
+                for (var i = 0; i < response.list.length; i++) {
+                    response.list[i].td1 = response.list[i].id;
+                    response.list[i].td2 = response.list[i].name;
+                    response.list[i].td3 = response.list[i].price;
+                    response.list[i].td4 = response.list[i].num;
+                    response.list[i].td5 = response.list[i].actual_price;
+                    response.list[i].td6 = response.list[i].create_time;
+                }
+                $scope.listArr = response.list;
+                $scope.count = response.count;
+              }else{
+                $scope.listArr = [];
+                $scope.count = 0;
+              }
+              
+          });
+ }
+$scope.goPage = function(offset){
+   $scope.offset = offset;
+   $scope.main();
+}
+$scope.main();
 }])
 
 /**
