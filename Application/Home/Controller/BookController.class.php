@@ -155,7 +155,7 @@ class BookController extends BaseController {
         }
         if($cate){
             //查询分类
-            $cate_id = M('category')->where(array('title'=>array('like'=>'%'.trim($cate).'%')))->getField('id');
+            $cate_id = M('category')->where(array('title'=>array('like','%'.trim($cate).'%')))->getField('id');
             $cate_id = $cate_id ? $cate_id : 0;
             $map['b.cate_id'] = array('eq',$cate_id);
         }
