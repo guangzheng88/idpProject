@@ -16,7 +16,7 @@ class SellController extends BaseController {
         $limit = I('limit',10,'intval');
         $offset = I('offset',0,'intval');
         $res['count'] = M('sell')->count();
-        $data = M('sell')->limit($limit,$offset)->field('sell.id,b.name,sell.price,sell.num,actual_price,sell.create_time')->join('book as b on sell.book_id=b.id')->select();
+        $data = M('sell')->limit($limit,$offset)->order('id desc')->field('sell.id,b.name,sell.price,sell.num,actual_price,sell.create_time')->join('book as b on sell.book_id=b.id')->select();
         $res['status'] = 1;
         $res['list'] = $data;
         $this->ajaxReturn($res);
