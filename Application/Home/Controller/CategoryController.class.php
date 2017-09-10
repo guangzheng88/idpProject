@@ -72,7 +72,6 @@ class CategoryController extends BaseController {
             $result['error'] = '该分类下有图书，不可删除';
             $this->ajaxReturn($result);
         }
-        exit('111');
         $res = M('category')->where(array('id'=>I('id')))->delete();
         if($res)
         {
