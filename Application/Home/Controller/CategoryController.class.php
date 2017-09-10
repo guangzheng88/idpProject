@@ -16,7 +16,7 @@ class CategoryController extends BaseController {
         $limit = I('limit',10,'intval');
         $offset = I('offset',0,'intval');
         $res['count'] = M('category')->limit($limit,$offset)->count();
-        $data = M('category')->limit($limit,$offset)->select();
+        $data = M('category')->order('id desc')->limit($limit,$offset)->select();
         $res['status'] = 1;
         $res['list'] = $data;
         $this->ajaxReturn($res);
