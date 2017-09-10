@@ -2,24 +2,140 @@ var ctrls = angular.module('ctrls', ['treeControl','ljHelper','ui.bootstrap','ng
 /**
  * 分类
  */
-ctrls.controller('classifyCtrl',['$scope','$routeParams',function($scope,$routeParams){
-
+ctrls.controller('classifyCtrl',['$scope','$http','$routeParams',function($scope,$http,$routeParams){
   $scope.nvalue = '';
-  $scope.addFun = function(){
-    $http({
-        method: 'POST',
-        url: "/index.php/gt-php-sdk/web/VerifyLoginServlet.php", 
-        data:{
-            'name':$scope.nvalue
-        }
-    }).success(function(response, status, headers, config) {
-        if(response.status == '1')
-        {
-          alert('添加成功!')
-        }
-    });
-  }
+  $scope.limit = 10;
+  $scope.offset = 0;
+  $scope.count = 0;
+  $scope.saveId = '';
+  $scope.svalue = '';
 
+//添加
+  $scope.addFun = function(){
+    if ($scope.nvalue) {
+      $http({
+          method: 'POST',
+          url: "/index.php/category/addCate", 
+          data:{
+              'title':$scope.nvalue
+          }
+      }).success(function(response, status, headers, config) {
+          if(response.status == '1')
+          {
+            alert('添加成功!');
+            window.location.reload();
+          }else{
+            alert('添加失败!');
+          }
+      });
+    } else {
+        alert('不可为空!');
+    }
+  }
+  // 修改
+  $scope.saveFun = function(){
+    if ($scope.svalue) {
+      $(".libmodal").hide();
+      $http({
+          method: 'POST',
+          url: "/index.php/category/updateCate", 
+          data:{
+              'title':$scope.svalue,
+              'id':$scope.saveId
+          }
+      }).success(function(response, status, headers, config) {
+          if(response.status == '1')
+          {
+            alert('修改成功!');
+            window.location.reload();
+          }else{
+            alert('修改失败!');
+          }
+      });
+    } else {
+      alert('不可为空!');
+    }
+  }
+$scope.secFun = function(){
+  $(".libmodal").hide();
+}
+ //表头内容
+  $scope.titleArr = {
+  th1:{name:'ID编号',width:'20%'},
+  th2:{name:'栏目名称',width:'40%'},
+  operation:{name:'操作',width:'40%'},
+  }
+  $scope.listArr = [];   
+    
+  //操作显示内容
+  $scope.operations = {
+    fun1Name:'修改',
+    fun2Name:'删除',
+  };
+  //点击基本属性设置触发
+  $scope.fun1 = function(fs)
+  {
+    $scope.saveId = fs.id;
+    $(".libmodal").show();
+    
+  }
+  //点击删除操作
+  $scope.fun2 = function(fs)
+  {
+        var r=confirm("确定要删除吗?")
+        if (r==true)
+        {
+          $http({
+                method: 'POST',
+                url: "/index.php/category/delCate", 
+                data:{
+                    'id':fs.id
+                }
+            }).success(function(response, status, headers, config) {
+                if(response.status == '1')
+                {
+                  alert('删除成功!');
+                  window.location.reload();
+                }else{
+                  alert('删除失败!');
+                }
+            });
+        }
+  }
+ $scope.main = function(){
+           var p =  $http({
+              method: 'POST',
+              url: "/index.php/category/getList", 
+              data:{
+                  'name':$scope.nvalue,'limit':$scope.limit,'offset':$scope.offset,
+              }
+          });
+           p.success(function(response, status, headers, config) {
+            if (response.isLogin == 0){
+                alert('登录状态丢失');
+                top.window.location.href="/index.php/login";
+            }
+
+              if(response.status == '1')
+              {
+                for (var i = 0; i < response.list.length; i++) {
+                  response.list[i].td1 = response.list[i].id;
+                  response.list[i].td2 = response.list[i].title;
+                }
+                $scope.listArr = response.list;
+                $scope.count = response.count;
+              }else{
+                $scope.listArr = [];
+                $scope.count = 0;
+              }
+              
+          });
+ }
+$scope.goPage = function(offset){
+   $scope.offset = offset;
+   $scope.main();
+}
+$scope.main();
 }])
 /**
  * top
@@ -1673,313 +1789,3 @@ ctrls.controller('textareaCCtrl',['$scope','$http','$routeParams',function($scop
   }
   /*********** 测试数据c1 end *********/
 }]);
-/*
-* 内容组件A
-* author:杨立军
-* date:2017-05-19
-*/
-ctrls.controller('contentACtrl',['$scope','$http','$routeParams',function($scope,$http,$routeParams){
-  //显示内容
-  // var newscontent = $http({
-  //   method:'POST',
-  //   url:'/index.php/data/content'
-  // });
-  // newscontent.success(function(response, status, headers, config) {
-  //   $scope.newcontent = response;//新闻资讯列表数组
-  //   console.log($scope.newcontent)
-  // }).error(function(error){
-  //   console.log(error)  
-  // });
-var newscontent = "<div class=&apos;new_detaisl_title&apos;><h5>米夏家具图书管理店：木纹艺术打造实木高冷范儿</h5></div><div class=&apos;new_details_date&apos;><span>2017/03/31</span>&nbsp;<span>来源：图书管理</span></div><div class=&apos;new_details_content&apos;><p>米夏家具于近期入驻图书管理大钟寺家居广场，米夏创办于2006年，专业生产经营后现代新古典家具，公司为集体设计、生产、销售于一体的规范化企业。总部位于台湾木田家具。产品已远销欧美、日本等国家。主营星级酒店、别墅和高级公寓配套家具。</p></div><div class=&apos;new_details_img&apos;><img src='/common/images/activity_details.jpg' width=&apos;100%&apos; height=&apos;100%&apos;></div><div class=&apos;new_details_location&apos;><dl><dt>米夏家具地址</dt><dd>图书管理大钟寺店一层 家具西厅</dd><dd>展位号：B-005-003</dd><dd>联系电话：010-62155190</dd><dd>实拍图书管理家居广场 米夏家具店面</dd></dl></div><div class='new_details_describer'><dl><dt>台湾米夏品牌介绍</dt><dd>夜晚不再宁静，但终归是有宁静的，因为梦中的场景还是那么一片灿烂的寂静。我能听见雨滴偶尔打在窗户上的声音，无意间打破了夜的寂静，而心，仍旧一片沉静，我能看见风不甘寂寞的影子，无意间划破夜的安宁。而我，依旧一阵伤怀，这风，这雨，给这清冷的夜增添了少许生动，我能感受到的是悠长夜里的丝丝忧伤。超越生命的本真，睿智与理性共存。<a class='keywordlink' href='http://www.jj59.com/'>文章</a>厚实，耐人品味。我坐在窗的一角，听着雨细细的下，看着风肆意的吹，似乎都很有节奏，告别一切工作的烦恼，抛开生活中的琐碎杂念，撤掉尔虞我诈的防线，摘下面具，脱掉面纱，在这个叫做寂静的夜里，独自品味孤独。寂静的梦里，总是那般温暖，紫色的蝴蝶总会在眼前翩翩起舞，转而又消失。抑或是那缕淡淡的紫光和一束紫色的茉莉静静开放，抑或是一碗香喷喷的蛋炒饭，抑或是没有人的金色舞会现场。所有的一切都是如此的寂静。</dd></dl><div class=&apos;new_details_img&apos;><img src='/common/images/activity_details.jpg' width=&apos;100%&apos; height=&apos;100%&apos;></div><div class=&apos;new_details_location&apos;><dl><dt>米夏家具地址</dt><dd>图书管理大钟寺店一层 家具西厅</dd><dd>展位号：B-005-003</dd><dd>联系电话：010-62155190</dd><dd>实拍图书管理家居广场 米夏家具店面</dd><dd>米夏家具于近期入驻图书管理大钟寺家居广场，米夏创办于2006年，专业生产经营后现代新古典家具，公司为集体设计、生产、销售于一体的规范化企业。总部位于台湾木田家具。产品已远销欧美、日本等国家。主营星级酒店、别墅和高级公寓配套家具。</dd><dd>旧城里的时光是旧的，当时光划过，年轮错乱的记忆偏偏刺伤浓浓的哀情，抓不住的温暖，留不住的馨香，灯光守在寂静的街角，自己躲在被枫叶遮住的窗边，我学不会忘记，偏偏学会了铭记，我深深地记得你幼稚的面容，你就像一座旧城我懂你的破旧，却不懂你的哀伤，我懂你的残缺，却不懂你的快乐，时光刻画的伤痕，在你身上，我假装看不见，我用手傻傻的去触碰你心间的伤，得到的却是你掉落眼泪的轻疼。黑夜里的灯火穿不透浓浓哀伤的云朵，黑夜的寂静在我身边，我守着寂静，等待落寞的灯火可以施舍给我一点点温暖我不奢求很多，只要那么一点点，我靠在树叶遮住的窗边，抬头望枫叶哭红的面容，远方血色的风景刺伤我的双眼，眼泪滑落，心事囚起几多寒颤的凉风，我抱起自己的手臂，原来一个人躲在没有温暖的黑夜里，心是凉的，手是凉的，眼泪也是凉的，全身冰凉，我奢求的温暖没有，还是就连这灯光也不可怜我。</dd><dd></dd>旧城里的时光是旧的，当时光划过，年轮错乱的记忆偏偏刺伤浓浓的哀情，抓不住的温暖，留不住的馨香，灯光守在寂静的街角，自己躲在被枫叶遮住的窗边，我学不会忘记，偏偏学会了铭记，我深深地记得你幼稚的面容，你就像一座旧城我懂你的破旧，却不懂你的哀伤，我懂你的残缺，却不懂你的快乐，时光刻画的伤痕，在你身上，我假装看不见，我用手傻傻的去触碰你心间的伤，得到的却是你掉落眼泪的轻疼。黑夜里的灯火穿不透浓浓哀伤的云朵，黑夜的寂静在我身边，我守着寂静，等待落寞的灯火可以施舍给我一点点温暖我不奢求很多，只要那么一点点，我靠在树叶遮住的窗边，抬头望枫叶哭红的面容，远方血色的风景刺伤我的双眼，眼泪滑落，心事囚起几多寒颤的凉风，我抱起自己的手臂，原来一个人躲在没有温暖的黑夜里，心是凉的，手是凉的，眼泪也是凉的，全身冰凉，我奢求的温暖没有，还是就连这灯光也不可怜我。旧城里的时光是旧的，当时光划过，年轮错乱的记忆偏偏刺伤浓浓的哀情，抓不住的温暖，留不住的馨香，灯光守在寂静的街角，自己躲在被枫叶遮住的窗边，我学不会忘记，偏偏学会了铭记，我深深地记得你幼稚的面容，你就像一座旧城我懂你的破旧，却不懂你的哀伤，我懂你的残缺，却不懂你的快乐，时光刻画的伤痕，在你身上，我假装看不见，我用手傻傻的去触碰你心间的伤，得到的却是你掉落眼泪的轻疼。黑夜里的灯火穿不透浓浓哀伤的云朵，黑夜的寂静在我身边，我守着寂静，等待落寞的灯火可以施舍给我一点点温暖我不奢求很多，只要那么一点点，我靠在树叶遮住的窗边，抬头望枫叶哭红的面容，远方血色的风景刺伤我的双眼，眼泪滑落，心事囚起几多寒颤的凉风，我抱起自己的手臂，原来一个人躲在没有温暖的黑夜里，心是凉的，手是凉的，眼泪也是凉的，全身冰凉，我奢求的温暖没有，还是就连这灯光也不可怜我。旧城里的时光是旧的，当时光划过，年轮错乱的记忆偏偏刺伤浓浓的哀情，抓不住的温暖，留不住的馨香，灯光守在寂静的街角，自己躲在被枫叶遮住的窗边，我学不会忘记，偏偏学会了铭记，我深深地记得你幼稚的面容，你就像一座旧城我懂你的破旧，却不懂你的哀伤，我懂你的残缺，却不懂你的快乐，时光刻画的伤痕，在你身上，我假装看不见，我用手傻傻的去触碰你心间的伤，得到的却是你掉落眼泪的轻疼。黑夜里的灯火穿不透浓浓哀伤的云朵，黑夜的寂静在我身边，我守着寂静，等待落寞的灯火可以施舍给我一点点温暖我不奢求很多，只要那么一点点，我靠在树叶遮住的窗边，抬头望枫叶哭红的面容，远方血色的风景刺伤我的双眼，眼泪滑落，心事囚起几多寒颤的凉风，我抱起自己的手臂，原来一个人躲在没有温暖的黑夜里，心是凉的，手是凉的，眼泪也是凉的，全身冰凉，我奢求的温暖没有，还是就连这灯光也不可怜我。</dl></div></div>"
-
-$scope.newcontent = newscontent;
-}]);
-/*
-* 树结构组件A
-* author:杨立军
-* date:2017-06-07
-*/
-ctrls.controller('treecontrol',['$scope','$http','$routeParams','ljChecks',function($scope,$http,$routeParams,$treeControl,ljChecks){
-  $scope.openurl ="/common/images/open2.png";//树结构根节点的显示图片 打开状态
-  $scope.closeurl = "/common/images/close2.png";//树结构根节点的显示图片 关闭状态
-  $scope.fileurl = "/common/images/page.gif";//树结构末尾节点的显示图片
-  $scope.addChildUrl="/app/#/buttonA/";//添加子分类的跳转链接
-  $scope.modChildUrl="/app/#/listA/";//修改分类的跳转链接
-  $scope.delChildUrl="/app/#/textareaA/";//删除分类的跳转链接
-  //树结构配置
-  $scope.treeOptions = {
-    nodeChildren: "children",//节点数组,也就是树结构子分类的key
-    dirSelectable: false,//点击根节点的文字,也就是一级分类，是否展开子分类,false：展开;true:不展开,true的时候想要展开子分类只能点击分类名称前面的图片才管用
-  }
-  //树结构的数据
-  $scope.dataForTheTree =
-  [
-    {"moduleName":'会员管理',"id":1, "children" : [
-        {"moduleName":'消费者管理',"id":2, "children" : [
-            {"moduleName":'消费者基础信息管理',"id":3,"children" : [] },
-            {"moduleName":'消费者基础信息查询',"id":4,"children" : [] },
-            {"moduleName":'家装类合同管理',"id":5,"children" : [] }
-        ]},
-        {"moduleName":'办公室库卡管理', "id":6,"children" : [
-                {"moduleName":'办公室库品名称维护',"id":7,"children" : [] },
-                {"moduleName":'办公室库管理',"id":8,"children" : [] },
-                {"moduleName":'办公室入库批次管理',"id":9,"children" : [] },
-                {"moduleName":'办公室库调拨管理',"id":10, "children" : [] }
-        ]},
-        {"moduleName":'卡类制卡管理',"id":11,"children" : [
-                {"moduleName":'单卡制卡管理',"id":12,"children" : [] },
-                {"moduleName":'批量制卡管理',"id":13,"children" : [] },
-                {"moduleName":'制卡验证',"id":14,"children" : [] },
-                {"moduleName":'手动修卡管理',"id":15, "children" : [] }
-        ] },
-    ]},
-    {"moduleName":'财务管理', "id":16,"children" : [
-            {"moduleName":'临时收费项目',"id":17,"children" : [] },
-            {"moduleName":'日常业务',"id":18,"children" : [] },
-    ] },
-    {"moduleName":'收银管理', "id":19,"children" : [
-            {"moduleName":'基础设施部分',"id":20,"children" : [
-                {"moduleName":'结算方式设置',"id":21,"children" : [] },
-                {"moduleName":'附加结算方式',"id":22,"children" : [] },
-                {"moduleName":'pos打印机设置',"id":23,"children" : [] },  
-            ] },
-            {"moduleName":'日常业务操作',"id":24,"children" : [] },
-            {"moduleName":'数据查询部分',"id":25,"children" : [] },
-    ] },
-    {"moduleName":'促销管理', "id":7,"children" : [
-            {"moduleName":'购物送礼活动',"id":26,"children" : [] },
-            {"moduleName":'基础设施部分',"id":27,"children" : [] },
-    ] },
-    {"moduleName":'食街管理', "id":28,"children" : [
-            {"moduleName":'新版食街',"id":29,"children" : [] },
-            {"moduleName":'食街管理',"id":30,"children" : [] },
-    ] },
-    {"moduleName":'商户后台', "id":31,"children" : [] },
-  ];
-}]);
-/*
-* tabC切换标签组件
-* author:liujingxia
-* date:2017-07-21
-*/
-ctrls.controller('tabCCtrl',['$scope',function($scope){
-    $scope.tabsc = [{'id':1,'tabName':'商城商品信息'},{'id':2,'tabName':'商品描述'},{'id':3,'tabName':'云平台信息'},{'id':4,'tabName':'配送说明'},{'id':5,'tabName':'操作信息'}];
-    //点击单个选项卡触发
-    $scope.toChange = function(item,index)
-    {
-        console.log('id为：'+item.id+'名称为：'+item.tabName)
-    }
-}])
-
-/*
-* 验证码组件B
-* author:杨立军
-* date:2017-07-21
-*/
-ctrls.controller('verificationCodeBCtrl',['$scope','$http','$routeParams',function($scope,$http,$routeParams){
-  $scope.verifyerror = 0;//0默认不显示验证码验证错误提示信息，为1的时候才显示
-  //点击提交触发 
-  $scope.subCheck = function(){
-    //获取input框输入的值
-    var inputV = angular.lowercase(document.getElementById('code_input').value);
-    //图片验证码里面的值
-    $scope.verifyCode = angular.lowercase($scope.verifycode);
-    //验证码验证
-    if(inputV != $scope.verifyCode)
-    {
-      $scope.verifyerror = 1;//1显示验证码验证错误提示信息
-    }else
-    {
-      $scope.verifyerror = 0;
-      alert(inputV)
-    }
-  };
-}]);
-/*
-* 标签B
-* author:liujingxia
-* date:2017-07-21
-*/
-ctrls.controller('labelBCtrl',['$scope','$http','$routeParams',function($scope,$http,$routeParams){
-    $scope.limit=20; //每次显示多少个
-    $scope.count=0; //总数
-    $scope.listlen=0; //总数
-    $scope.offset=0; //偏移量
-    $scope.jsonArr='';//标签数组
-    $scope.labelsarr = [];
-    //查询标签主函数
-    $scope.main=function(){
-
-        //请求数据
-        // var labels = $http({
-        //     method:'POST',
-        //     url:'/common/json/labelb.json'
-        // });
-        // labels.success(function(response, status, headers, config){
-        //     $scope.labelsarr = response;
-        //     $scope.count = response.count;
-        //     console.log($scope.limit);
-        // }).error(function(error){
-        //     console.log(error);
-        //     $scope.labelsarr = {};
-        //     $scope.count = 0;
-        // });
-
-
-        var labels = $http({
-            method:'POST',
-            url:'/common/json/labelb.json'
-         });
-
-
-        labels.success(function(response, status, headers, config){
-            $scope.jsonArr = response.list;
-            $scope.count = response.count;
-            var end = $scope.offset+$scope.limit < response.count ? $scope.offset+$scope.limit : response.count;
-            for (var i = 0; i < end; i++) {
-                $scope.labelsarr[i] = $scope.jsonArr[i];
-            }
-            $scope.listlen = $scope.labelsarr.length;
-        });
-    }
-    //点击加载更多
-
-    $scope.loadmore = function(){
-        $scope.offset+=$scope.limit;
-        $scope.main()
-    }
-    //点击标签  
-    $scope.labelclick = function(fs){
-       alert('需要操作的数组信息:id=>'+fs.id+'标签名=>'+fs.name);
-        angular.forEach($scope.labelsarr,function(item){
-                if(item.id == fs.id)
-                {
-                      if (fs.done == false || fs.done == 'false'){
-                         item.done = true;
-                      } else {
-                        item.done = false;
-                      }
-                }else
-                {
-                  item.done = false;
-                } 
-        });
-    }
-    //调用主方法
-    $scope.main();
-}]);
-
-/*
-* 上传图片B
-* author:yanglijun
-* date:2017-08-02
-*/
-ctrls.controller('uploaderBCtrl',['$scope','$http','$routeParams',function($scope,$http,$routeParams){
-  //初始化的图片
-  $scope.alreadyImg =[
-    {id:'1',imgName:'already1.jpg',imgUrl:'/common/uploade_image/upload_more/already1.jpg'},
-    {id:'2',imgName:'already2.jpg',imgUrl:'/common/uploade_image/upload_more/already2.jpg'},
-    {id:'3',imgName:'already3.jpg',imgUrl:'/common/uploade_image/upload_more/already3.jpg'}
-  ]
-  //删除已经有的照片
-  $scope.delImg = function(id,imgName,imgUrl,$event)
-  {
-     var delImgId = event.srcElement.id;//要删除图片的id
-    //根据图片名称删除数据库的图片
-    if(imgName !='')
-    {
-      //删除图库里的图片
-      var delimg = $http({
-        url: '/index.php/data/upload/delImg',
-        method: 'POST',
-        data:{
-          'delImgUrl':imgUrl//要删除图片的url
-        }
-      });
-      delimg.success(function (data) {
-        if (data.state == 1){
-          $('#'+delImgId).parent('span').remove();//图片清空                        
-        }else
-        {
-          alert('删除图片失败！');
-        }   
-      }).error(function(error){
-        alert('删除图片失败！');
-      });
-    }
-  }
-  //点击保存的时候触发
-  $scope.saveB1 = function()
-  {
-    //返回上传的所有图片的名称
-    console.log($scope.imgNames)
-  }
-}]);
-
-
-/*
-* 列表样式B lj-list-i
-* author:yanglijun
-* date:2017-02-28
-*/
-ctrls.controller('listICtrl',['$scope','$routeParams',function($scope,$routeParams){
-  //使用状态数组
-  $scope.statusArr = {
-    status1:'未发放',
-    status2:'已发放',
-    status3:'已使用',
-    status4:'已作废',
-    status5:'已过期'
-  };
-  //表头内容
-  $scope.titleArr = {
-  th1:{name:'券面额（元）',width:'10%'},
-  th2:{name:'领取人手机号',width:'14%'},
-  th3:{name:'使用码',width:'14%'},
-  th4:{name:'券状态',width:'10%'},
-  th5:{name:'使用人手机号',width:'14%'},
-  th6:{name:'合同号',width:'14%'},
-  th7:{name:'合同额（元）',width:'14%'},
-  operation:{name:'操作',width:'10%'},
-  }
-  //列表内容 从数据库获取数据然后转换
-  $scope.listArr = [
-  {id:'1',td1:'500',td2:'',td3:'',td4:'1',td5:'',td6:'',td7:''},
-  {id:'2',td1:'500',td2:'15010052065',td3:'1720003500001',td4:'2',td5:'',td6:'',td7:''},
-  {id:'3',td1:'500',td2:'15010052065',td3:'1720003500001',td4:'3',td5:'',td6:'',td7:''},
-  {id:'4',td1:'500',td2:'15010052065',td3:'1720003500001',td4:'5',td5:'',td6:'',td7:''},
-  {id:'5',td1:'500',td2:'',td3:'',td4:'4',td5:'',td6:'',td7:''},
-  ]; 
-
-  //操作显示内容
-  $scope.operations = {
-    fun1Name:'显示使用信息',
-    // fun2Name:'基本属性设置',
-    // fun3Name:'黑名单设置',
-    // fun4Name:"删除"
-  };
-  //点击基本属性设置触发
-  $scope.fun1 = function(fs)
-  {
-    fs.td5="13240737533";
-    fs.td6="1512500987";
-    fs.td7="5000.00 ";
-    //alert('券查看操作,id为:'+fs.id);
-  }
-  //点击黑名单设置触发
-  $scope.fun2 = function(fs)
-  {
-    alert('基本属性设置操作,id为:'+fs.id)
-  }
-  //点击黑名单设置 fun3触发
-  $scope.fun3 = function(fs)
-  {
-    alert('黑名单设置操作,id为:'+fs.id);
-  }
-  //点击删除操作 fun4触发
-  $scope.fun4 = function(fs)
-  {
-    alert('点击删除操作,id为:'+fs.id);
-  }
-  /* --- 测试数据  end ---------------*/ 
-}])
