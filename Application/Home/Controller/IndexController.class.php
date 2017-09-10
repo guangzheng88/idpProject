@@ -23,7 +23,7 @@ class IndexController extends Controller {
     }
     public function top()
     {
-        $this->assign('userinfo',$this->userinfo);
+        $this->assign('userinfo',session('userinfo'));
         $this->display();
     }
     public function left()

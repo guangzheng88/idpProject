@@ -86,7 +86,7 @@ class LoginController extends Controller {
     {
         session('userinfo',null);
         echo '<script>';
-        echo 'top.window.location.href=/index.php/login';
+        echo 'top.window.location.href="/index.php/login";';
         echo '</script>';
     }
 }
