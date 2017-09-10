@@ -54,11 +54,7 @@ class AdminController extends BaseController {
         $roles = M('role')->select();
         $res['role'] = $roles;
         $this->assign('row',$row);
-        if(IS_AJAX)
-        {
-            $this->ajaxReturn($res);
-        }
-        $this->display();
+        $this->ajaxReturn($res);
     }
     /**
      * 获取角色列表
