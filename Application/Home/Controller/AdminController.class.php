@@ -37,7 +37,6 @@ class AdminController extends BaseController {
         $res['count'] = M('admin')->where($map)->limit($limit,$offset)->count();
         $row = M('admin')->where($map)->limit($limit,$offset)->select();
         $res['status'] = 1;
-        $res['list'] = $row;
         //查询角色
         foreach ($row as $key=>$val)
         {
@@ -50,9 +49,16 @@ class AdminController extends BaseController {
                 $row[$key]['title'] = '-----';
             }
         }
+        $res['list'] = $row;
+        //角色
+        $roles = M('role')->select();
+        $res['role'] = $roles;
         $this->assign('row',$row);
+        if(IS_AJAX)
+        {
+            $this->ajaxReturn($res);
+        }
         $this->display();
-        //$this->ajaxReturn($res);
     }
     /**
      * 获取角色列表
