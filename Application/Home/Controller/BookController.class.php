@@ -125,7 +125,7 @@ class BookController extends BaseController {
     public function findBook()
     {
         $map['serial_number'] = I('serial_number');
-        $bookInfo = M('book')->where($map)->find();
+        $bookInfo = M('book')->field('book.*,r.pur_price')->where($map)->join('repertory as r on r.book_id=book.id')->find();
         if($bookInfo)
         {
             $res['status'] = 1;
