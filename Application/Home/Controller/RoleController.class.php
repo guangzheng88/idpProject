@@ -10,6 +10,33 @@ class RoleController extends BaseController {
         parent::__construct($auth);
     }
     /**
+     * 角色列表
+     */
+    public function getList()
+    {
+        $res = M('role')->select();
+        $str = '';
+        foreach ($res as $k=>$v)
+        {
+            $authIds = explode(',', $v['auth_ids']);
+            foreach ($authIds as $key=>$val)
+            {
+                $authTitle = M('auth')->where(array('id'=>$val))->getField();
+                if($key == 0)
+                {
+                    $str = $authTitle;
+                }else
+                {
+                    $str .= ','.$authTitle;
+                }
+            }
+            $res[$k]['auth'] = $str;
+        }
+        $result['status'] = 1;
+        $result['list'] = $res;
+        $this->ajaxReturn($result);
+    }
+    /**
      * 添加角色页面
      */
     public function index()
