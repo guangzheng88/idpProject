@@ -31,7 +31,7 @@ class SellController extends BaseController {
         $data['num'] = $post['num'];
         $data['price'] = $post['price'];
         $data['actual_price'] = $data['num']*$data['price'];
-        $data['create_time'] = data('Y-m-d H:i:s');
+        $data['create_time'] = date('Y-m-d H:i:s');
         $res = M('sell')->data($data)->add();
         if($res)
         {
