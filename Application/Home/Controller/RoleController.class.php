@@ -21,7 +21,7 @@ class RoleController extends BaseController {
             $authIds = explode(',', $v['auth_ids']);
             foreach ($authIds as $key=>$val)
             {
-                $authTitle = M('auth')->where(array('id'=>$val))->getField();
+                $authTitle = M('auth')->where(array('id'=>$val))->getField('title');
                 if($key == 0)
                 {
                     $str = $authTitle;
