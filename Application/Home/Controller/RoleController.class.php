@@ -32,6 +32,8 @@ class RoleController extends BaseController {
             }
             $res[$k]['auth'] = $str;
         }
+        $row = M('auth')->select();
+        $result['auth'] = $row;
         $result['status'] = 1;
         $result['list'] = $res;
         $this->ajaxReturn($result);
