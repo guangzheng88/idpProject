@@ -1,0 +1,102 @@
+<link rel="stylesheet" href="/common/css/lib.css">
+<link rel="stylesheet" href="/common/css/list/listB1.css">
+<link rel="stylesheet" href="/common/css/page/paging-a1.css">
+
+<style type="text/css">
+.listb-table {
+/*     min-width: 1280px; 
+     max-width: 680px; */
+    border-right: none;
+    font-size: 14px;
+}
+.libmodal{
+    background: #000;
+    margin: auto;  
+    position:fixed;
+    opacity:0.3;
+    top: 0; left: 0; bottom: 0; right: 0; 
+}
+
+.libmodal{
+    background: #000;
+    margin: auto;  
+    position:fixed;
+    opacity:1;
+    top: 0; left: 0; bottom: 0; right: 0; 
+    display: none;
+}
+.modal-body{
+    width: 30%;
+    opacity:10;
+    margin:100px auto;
+    background: #fff;
+    border: 1px solid;
+    padding: 20px;
+}
+.modal-body p{
+   text-align: center;
+}
+.modal-body .btn{
+    margin:10px 30px;
+}
+ .modal-body span{
+    margin:10px 10px;
+}
+.paging-a1{
+    margin-left: 30px;
+}
+.select-a1-l {
+    width: 80px;
+    display: inline-block;
+    margin:0 20px;
+    height: 28px;
+}
+.select-a1-l select{
+    height: 25px;
+    line-height: 25px;
+    font-size: 16px;
+}
+.lm{
+    width: 80px;
+    max-width: 80px;
+    min-width: 80px;
+    margin-right: 10px;
+    display: inline-block;
+}
+</style>
+ 
+<div class="container">
+<p></p>
+<p>
+    <span>
+        名称: <input type="" name="text" ng-model="name" class="inputm">
+    </span>
+        <span>
+        分类: <input type="" name="cate" ng-model="cate" class="inputm">
+    </span>
+        <span>
+        状态: <lj-select-a-1-l ljf="ljfun(fs)" selects="selectArrm" isshow="errorShow" message="errorText" selected='status'></lj-select-a-1-l>
+    </span>
+    <button type="button"  class="btn btn-primary btn-md" ng-click='addFun()' >
+    搜索
+    </button>
+</p>
+    <hr>
+
+
+        <lj-list-b-1 titles="titleArr" lists="listArr" operations="operations" limit='10' iscomplete='1' fun1='fun1(fs)' fun2="fun2(fs)" ></lj-list-b-1>
+        <lj-paging-a-1 count='count' limit='limit' offset='offset' ljf='goPage(data)' ></lj-paging-a-1>
+
+
+
+<div id="example" class="libmodal" > 
+    <div class="modal-body">
+        <p><span>栏目名称</span><span><input type="text" ng-model="svalue" ></span></p> 
+        <p>
+        <button class="btn btn-success" ng-click='saveFun()'>修改</button>
+        <button class="btn" data-dismiss="modal" ng-click='secFun()' >取消</button>
+        </p>
+    </div> 
+</div> 
+
+</div>
