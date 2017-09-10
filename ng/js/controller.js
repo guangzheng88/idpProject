@@ -125,6 +125,9 @@ $scope.secFun = function(){
                 $scope.listArr = response.list;
                 $scope.count = response.count;
               }else{
+                if (response.error == '权限不足') {
+                  alert(response.error);
+                }
                 $scope.listArr = [];
                 $scope.count = 0;
               }
@@ -396,6 +399,9 @@ $scope.fun1 = function(fs)
                 $scope.count = response.count;
                 console.log($scope.listArr);
               }else{
+                  if (response.error == '权限不足') {
+                      alert(response.error);
+                    }
                 $scope.listArr = [];
                 $scope.count = 0;
               }
@@ -544,6 +550,9 @@ $scope.secFun = function(){
                 $scope.listArr = response.list;
                 $scope.count = response.count;
               }else{
+                if (response.error == '权限不足') {
+                      alert(response.error);
+                    }
                 $scope.listArr = [];
                 $scope.count = 0;
               }
@@ -672,7 +681,7 @@ ctrls.controller('userListCtrl',['$scope','$http','$routeParams',function($scope
                   }
               });
                p.success(function(response, status, headers, config) {
-                console.log(response);
+
                 if (response.isLogin == 0){
                     alert('登录状态丢失');
                     top.window.location.href="/index.php/login";
@@ -702,6 +711,9 @@ ctrls.controller('userListCtrl',['$scope','$http','$routeParams',function($scope
                     $scope.role = response.role;
 
                   }else{
+                    if (response.error == '权限不足') {
+                      alert(response.error);
+                    }
                     $scope.listArr = [];
                     $scope.count = 0;
                   }
@@ -829,6 +841,9 @@ ctrls.controller('roleListCtrl',['$scope','$http','$routeParams',function($scope
                     
 
                   }else{
+                    if (response.error == '权限不足') {
+                      alert(response.error);
+                    }
                     $scope.listArr = [];
                     $scope.count = 0;
                   }
@@ -927,6 +942,9 @@ $scope.fun1 = function(fs)
                 $scope.listArr = response.list;
                 $scope.count = response.count;
               }else{
+                if (response.error == '权限不足') {
+                  alert(response.error);
+                }
                 $scope.listArr = [];
                 $scope.count = 0;
               }
