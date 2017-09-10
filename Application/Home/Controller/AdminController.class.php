@@ -38,7 +38,21 @@ class AdminController extends BaseController {
         $row = M('admin')->where($map)->limit($limit,$offset)->select();
         $res['status'] = 1;
         $res['list'] = $row;
-        $this->ajaxReturn($res);
+        //查询角色
+        foreach ($row as $key=>$val)
+        {
+            $role = M('role')->where(array('id'=>$val['role_id']))->find();
+            if($role)
+            {
+                $row[$key]['title'] = $role['title'];
+            }else
+            {
+                $row[$key]['title'] = '-----';
+            }
+        }
+        $this->assign('row',$row);
+        $this->display();
+        //$this->ajaxReturn($res);
     }
     /**
      * 获取角色列表

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>用户列表</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>用户名</th>
+        <th>角色</th>
+        <th>状态</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    <foreach name="row" item="val">
+    <tr>
+        <td>{$val.id}</td>
+        <td>{$val.username}</td>
+        <td>{$val.title}</td>
+        <td><if condition="$val['status'] == 1">已审核<else/>未审核</if></td>
+        <td>
+            <a href="__CONTROLLER__/auditAdmin?status=<if condition="$val['status'] == 1">0<else/>1</if>">审核</a>
+            <a href="__CONTROLLER__/getRole?id={$val.id}&username={$val.username}">修改角色</a>
+        </td>
+    </tr>
+    </foreach>
+</table>
+</body>
+</html>
