@@ -165,7 +165,7 @@ ctrls.controller('booksAddCtrl',['$scope','$http','$routeParams',function($scope
 //添加
   $scope.addFun = function(){
 
-
+alert($scope.bookId);
 
     if ($scope.vNum) {
       $http({
@@ -257,8 +257,9 @@ $scope.getDel = function(){
 
               if(response.status == '1')
               {
+                 
                   $scope.isHas = 1;
-                  $scope.bookId = response.data.book_id;
+                  $scope.bookId = response.data.id;
                   $scope.vNanme = response.data.name;
                   $scope.selected= response.data.cate_id;
                   $scope.vJin = response.data.pur_price;
@@ -271,6 +272,181 @@ $scope.getDel = function(){
 
 }
 }])
+
+
+/**
+ * booksListCtrl
+ */
+ctrls.controller('booksListCtrl',['$scope','$http','$routeParams',function($scope,$http,$routeParams){
+  $scope.name= '';
+  $scope.cate= '';
+
+  $scope.limit = 10;
+  $scope.offset = 0;
+  $scope.count = 0;
+
+   var datas =  [
+                                {id: "1",name: "已审核"},
+                                {id: "2",name: "未审核"}
+                            ];
+    //设置默认值
+    $scope.selectArrm =[{id: "0",name: "请选择"}];
+    //对应默认设置id
+    $scope.status="0";
+    //追加选项
+    $scope.selectArrm = $scope.selectArrm.concat(datas);
+
+  //搜索
+  $scope.addFun = function(){
+    $scope.main();
+  }
+  // 修改
+  $scope.saveFun = function(){
+    if ($scope.svalue) {
+      $(".libmodal").hide();
+      $http({
+          method: 'POST',
+          url: "/index.php/category/updateCate", 
+          data:{
+              'title':$scope.svalue,
+              'id':$scope.saveId
+          }
+      }).success(function(response, status, headers, config) {
+          if(response.status == '1')
+          {
+            alert('修改成功!');
+            window.location.reload();
+          }else{
+            alert('修改失败!');
+          }
+      });
+    } else {
+      alert('不可为空!');
+    }
+  }
+$scope.secFun = function(){
+  $(".libmodal").hide();
+}
+ //表头内容
+  $scope.titleArr = {
+th1:{name:'ID',width:'8%'},
+th2:{name:'图书编号',width:'8%'},
+th3:{name:'图书名称',width:'8%'},
+th4:{name:'分类',width:'8%'},
+th5:{name:'售价',width:'8%'},
+th6:{name:'进价',width:'8%'},
+th7:{name:'作者',width:'8%'},
+th8:{name:'出版社',width:'8%'},
+th9:{name:'入库数量',width:'8%'},
+th10:{name:'剩余库存',width:'8%'},
+th11:{name:'审核状态',width:'8%'},
+
+  operation:{name:'操作',width:'12%'},
+  }
+  $scope.listArr = [];   
+    
+  //操作显示内容
+  $scope.operations = {
+    fun1Name:'审核'
+  };
+
+//操作审核
+$scope.fun1 = function(fs)
+{
+      var status = fs.status;
+      if (status == 1)
+      {
+        alert('已经审核!');
+        return false;
+      } 
+        var r=confirm("确定吗?")
+        if (r==true)
+        {
+              var r_id = fs.r_id;
+              var num = fs.number;
+                $http({
+                      method: 'POST',
+                      url: "/index.php/book/checkBook", 
+                      data:{
+                          'id':r_id,
+                          'num':num
+                      }
+                  }).success(function(response, status, headers, config) {
+                    console.log(response);
+                      if(response.status == '1')
+                      {
+                        alert('审核成功!');
+                        window.location.reload();
+                      }else{
+                        alert('审核失败!');
+                      }
+                  });
+        }
+  }
+ $scope.main = function(){
+           var p =  $http({
+              method: 'POST',
+              url: "/index.php/book/index", 
+              data:{
+                  'name':$scope.name,
+                  'cate':$scope.cate,
+                  'status':$scope.status,
+                  'limit':$scope.limit,
+                  'offset':$scope.offset,
+              }
+          });
+           p.success(function(response, status, headers, config) {
+
+
+            console.log(response);
+
+
+            if (response.isLogin == 0){
+                alert('登录状态丢失');
+                top.window.location.href="/index.php/login";
+            }
+              if(response.status == '1')
+              {
+                for (var i = 0; i < response.list.length; i++) {
+                    response.list[i].td1 = response.list[i].id;
+                    response.list[i].td2 = response.list[i].publish_club;
+                    response.list[i].td3 = response.list[i].name;
+                    response.list[i].td4 = response.list[i].title;
+
+                    response.list[i].td5 = response.list[i].price;
+                    response.list[i].td6 = response.list[i].pur_price;
+                    response.list[i].td7 = response.list[i].author;
+                    response.list[i].td8 = response.list[i].publish_club;
+                    response.list[i].td9 = response.list[i].number;
+                    response.list[i].td10 = response.list[i].num;
+                    if(response.list[i].status == 0){
+                      response.list[i].td11 = '未审核';
+                    }else{
+                       response.list[i].td11  = '已审核';
+                    }
+                  
+
+
+                }
+                $scope.listArr = response.list;
+                $scope.count = response.count;
+                console.log($scope.listArr);
+              }else{
+                $scope.listArr = [];
+                $scope.count = 0;
+              }
+              
+          });
+ }
+$scope.goPage = function(offset){
+   $scope.offset = offset;
+   $scope.main();
+}
+$scope.main();
+}])
+
+
+
 /**
  * left
  */

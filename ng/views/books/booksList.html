@@ -1,10 +1,11 @@
 <link rel="stylesheet" href="/common/css/lib.css">
 <link rel="stylesheet" href="/common/css/list/listB1.css">
 <link rel="stylesheet" href="/common/css/page/paging-a1.css">
+
 <style type="text/css">
 .listb-table {
-     min-width: 680px; 
-     max-width: 680px; 
+/*     min-width: 1280px; 
+     max-width: 680px; */
     border-right: none;
     font-size: 14px;
 }
@@ -44,17 +45,50 @@
 .paging-a1{
     margin-left: 30px;
 }
+.select-a1-l {
+    width: 80px;
+    display: inline-block;
+    margin:0 20px;
+    height: 28px;
+}
+.select-a1-l select{
+    height: 25px;
+    line-height: 25px;
+    font-size: 16px;
+}
+.lm{
+    width: 80px;
+    max-width: 80px;
+    min-width: 80px;
+    margin-right: 10px;
+    display: inline-block;
+}
 </style>
  
 <div class="container">
 <p></p>
-    <input type="" name="text" ng-model="nvalue" class="inputm">
+<p>
+    <span>
+        名称: <input type="" name="text" ng-model="name" class="inputm">
+    </span>
+        <span>
+        分类: <input type="" name="cate" ng-model="cate" class="inputm">
+    </span>
+        <span>
+        状态: <lj-select-a-1-l ljf="ljfun(fs)" selects="selectArrm" isshow="errorShow" message="errorText" selected='status'></lj-select-a-1-l>
+    </span>
     <button type="button"  class="btn btn-primary btn-md" ng-click='addFun()' >
-    添加分类
+    搜索
     </button>
+</p>
     <hr>
+
+
         <lj-list-b-1 titles="titleArr" lists="listArr" operations="operations" limit='10' iscomplete='1' fun1='fun1(fs)' fun2="fun2(fs)" ></lj-list-b-1>
         <lj-paging-a-1 count='count' limit='limit' offset='offset' ljf='goPage(data)' ></lj-paging-a-1>
+
+
+
 <div id="example" class="libmodal" > 
     <div class="modal-body">
         <p><span>栏目名称</span><span><input type="text" ng-model="svalue" ></span></p> 
