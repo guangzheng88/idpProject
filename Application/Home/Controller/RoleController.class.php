@@ -53,8 +53,8 @@ class RoleController extends BaseController {
     public function addAuth()
     {
         $post = I('post.');
-        $data['title'] = $post['title'];
-        $data['auth_ids'] = implode(',', $post['authId']);
+        $data['title'] = trim($post['title']);
+        //$data['auth_ids'] = implode(',', $post['authId']);
         $data['create_time'] = date('Y-m-d H:i:s');
         $res = M('role')->data($data)->add();
         if($res)
