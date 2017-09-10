@@ -14,9 +14,9 @@ when('/booksList', {
         templateUrl: renovateUrl('views/books/booksList.html')
     }).
 
-    when('/buttonA', {
-        controller: 'buttonACtrl',  //控制器名称
-        templateUrl: renovateUrl('views/button/buttonA.html')//按钮A超大类型指向视图
+    when('/booksAuditing', {
+        controller: 'booksAuditingCtrl',  
+        templateUrl: renovateUrl('views/books/booksAuditing.html')
     }).
     otherwise({
         redirectTo: '/classify'
