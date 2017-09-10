@@ -67,4 +67,22 @@ class RoleController extends BaseController {
         }
         $this->ajaxReturn($result);
     }
+    /**
+     * 修改权限
+     */
+    public function updateAuth()
+    {
+        $id = I('id',0,'intval');
+        $data['auth_ids'] = implode(',', $post['authId']);
+        $res = M('role')->data($data)->where(array('id'=>$id))->save();
+        if($res)
+        {
+            $result['status'] = 1;
+        }else
+        {
+            $result['status'] = 0;
+            $result['error'] = '修改失败';
+        }
+        $this->ajaxReturn($result);
+    }
 }
