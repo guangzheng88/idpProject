@@ -35,7 +35,7 @@ class AdminController extends BaseController {
         $offset = I('offset',0,'intval');
         $map['username'] = array('neq','admin');
         $res['count'] = M('admin')->where($map)->limit($limit,$offset)->count();
-        $row = M('admin')->where($map)->limit($limit,$offset)->select();
+        $row = M('admin')->where($map)->limit($limit,$offset)->order('id desc')->select();
         $res['status'] = 1;
         //查询角色
         foreach ($row as $key=>$val)
