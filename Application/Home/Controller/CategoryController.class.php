@@ -64,6 +64,15 @@ class CategoryController extends BaseController {
      */
     public function delCate()
     {
+        $map['cate_id'] = I('id',0,'intval');
+        $book = M('book')->where($map)->find();
+        if($book)
+        {
+            $result['status'] = 2;
+            $result['error'] = '该分类下有图书，不可删除';
+            $this->ajaxReturn($result);
+        }
+        exit('111');
         $res = M('category')->where(array('id'=>I('id')))->delete();
         if($res)
         {

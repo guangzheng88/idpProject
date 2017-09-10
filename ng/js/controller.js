@@ -97,7 +97,7 @@ $scope.secFun = function(){
                   alert('删除成功!');
                   window.location.reload();
                 }else{
-                  alert('删除失败!');
+                  alert(response.error);
                 }
             });
         }
