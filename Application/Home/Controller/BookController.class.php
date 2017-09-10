@@ -118,9 +118,6 @@ class BookController extends BaseController {
                 ->select();
         $res['status'] = 1;
         $res['list'] = $row;
-        $res['name'] = $name;
-        $res['cate'] = $cate;
-        $res['status'] = $status;
         $this->ajaxReturn($res);
     }
     /**
