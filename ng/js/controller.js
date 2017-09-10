@@ -138,10 +138,138 @@ $scope.goPage = function(offset){
 $scope.main();
 }])
 /**
- * top
+ * booksAddCtrl
  */
-ctrls.controller('tCtrl',['$scope','$routeParams',function($scope,$routeParams){
-  //alert('top');
+ctrls.controller('booksAddCtrl',['$scope','$http','$routeParams',function($scope,$http,$routeParams){
+ // 图书编号 vNum
+// 图书名称 vNanme
+// 图书分类 selected
+// 进价 vJin
+// 售价 price
+// 作者  vAuthor
+// 出版社 vChu
+// 数量 vCon
+      $scope.isHas = 0;
+      $scope.vNum = '';
+      $scope.vNanme = '';
+      $scope.selected="0";
+      $scope.vJin = '';
+      $scope.vAuthor = '';
+      $scope.vChu = '';
+      $scope.vCon = '';
+      $scope.bookId = '';
+      $scope.price = '';
+
+ 
+
+//添加
+  $scope.addFun = function(){
+
+
+
+    if ($scope.vNum) {
+      $http({
+          method: 'POST',
+          url: "/index.php/book/addBook", 
+          data:{
+              'name':$scope.vNanme,
+              'cate_id':$scope.selected,
+              'author':$scope.vAuthor,
+              'pur_price':$scope.vJin,
+              'number':$scope.vCon,
+              'isHas':$scope.isHas,
+              'serial_number':$scope.vNum,
+              'book_id':$scope.bookId,
+              'publish_club':$scope.vChu,
+              'price':$scope.price,
+          }
+
+      }).success(function(response, status, headers, config) {
+          if(response.status == '1')
+          {
+            alert('添加成功!');
+            window.location.reload();
+          }else{
+            alert('添加失败!');
+          }
+      });
+    } else {
+        alert('不可为空!');
+    }
+  }
+  
+    //设置默认值
+    $scope.selectArr =[{id: "0",name: "请选择"}];
+    //显示错误标示
+    $scope.errorShow = false;
+    //错误提示语
+    $scope.errorText = '不可为空';
+    //选中值更换，处理
+    $scope.ljfun = function(id)
+    {
+        console.log('选中的是：'+id);
+        $scope.selected=id;
+    }       
+
+
+ $scope.main = function(){
+           var p =  $http({
+              method: 'POST',
+              url: "/index.php/category/getList", 
+              data:{
+                  'limit':100,'offset':0,
+              }
+          });
+           p.success(function(response, status, headers, config) {
+            if (response.isLogin == 0){
+                alert('登录状态丢失');
+                top.window.location.href="/index.php/login";
+            }
+              if(response.status == '1')
+              {
+                var newData = [];
+                for (var i = 0; i < response.list.length; i++) {
+                  response.list[i].name = response.list[i].title;
+                }
+                $scope.selectArr = $scope.selectArr.concat(response.list);
+              }else{
+                $scope.selectArr =[{id: "0",name: "请选择"}];
+              }
+              
+          });
+ }
+$scope.main();
+
+$scope.getDel = function(){
+  var get =  $http({
+              method: 'POST',
+              url: "/index.php/book/findBook", 
+              data:{
+                  'serial_number':$scope.vNum
+              }
+          });
+          get.success(function(response, status, headers, config) {
+              if (response.isLogin == 0){
+                  alert('登录状态丢失');
+                  top.window.location.href="/index.php/login";
+              }
+              console.log(response);
+
+              if(response.status == '1')
+              {
+                  $scope.isHas = 1;
+                  $scope.bookId = response.data.book_id;
+                  $scope.vNanme = response.data.name;
+                  $scope.selected= response.data.cate_id;
+                  $scope.vJin = response.data.pur_price;
+                  $scope.vAuthor = response.data.author;
+                  $scope.vChu = response.data.publish_club;
+                  $scope.vCon = response.data.number;
+                  $scope.price = response.data.price;
+              }       
+          });
+
+}
 }])
 /**
  * left

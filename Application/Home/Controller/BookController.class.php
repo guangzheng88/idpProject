@@ -38,7 +38,11 @@ class BookController extends BaseController {
             //入图书表
             $res = M('book')->data($newBook)->add();
             //入仓库表
-            $res = M('repertory')->data($dataR)->add();
+            if($res)
+            {
+                $dataR['book_id'] = $res;
+                $res = M('repertory')->data($dataR)->add();
+            }
         }
         if($res)
         {
@@ -124,7 +128,7 @@ class BookController extends BaseController {
      */
     public function findBook()
     {
-        $map['serial_number'] = I('serial_number');
+        $map['serial_number'] =I('serial_number');
         $bookInfo = M('book')->field('book.*,r.pur_price')->where($map)->join('repertory as r on r.book_id=book.id')->find();
         if($bookInfo)
         {

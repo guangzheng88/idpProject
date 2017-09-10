@@ -5,8 +5,14 @@ myApp.config(function($routeProvider){
         controller: 'classifyCtrl',
         templateUrl: renovateUrl('views/classify/index.html')
     }).
-
-
+when('/booksAdd', {
+        controller: 'booksAddCtrl',
+        templateUrl: renovateUrl('views/books/booksAdd.html')
+    }).
+when('/booksList', {
+        controller: 'booksListCtrl',
+        templateUrl: renovateUrl('views/books/booksList.html')
+    }).
 
     when('/buttonA', {
         controller: 'buttonACtrl',  //控制器名称

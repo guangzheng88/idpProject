@@ -4,6 +4,77 @@
     <meta charset="utf-8"> 
     <title>左侧导航</title>   
     <link href="/common/css/bootstrap.css" type="text/css" rel="stylesheet" /> 
+    <script src ="/common/js/angular.min.js" type="text/javascript" ></script>    
+    <script src ="/common/js/jquery.min.js" type="text/javascript" ></script>
+    <script src ="/common/js/bootstrap.js" type="text/javascript" ></script>
+    <link href="/ng/css/template.css" type="text/css" rel="stylesheet" />
+</head>
+<body  class="lj-left">
+<div class="panel-group" id="accordion" >
+
+
+      <div class="panel panel-default" >
+
+
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" 
+                   href="#lib1">
+            <h4 class="panel-title">
+                <p >
+                   分类管理
+                </p>
+            </h4>
+        </div>
+        <div id="lib1" class="panel-collapse collapse">
+                <div class="list-group">
+                    <a href="/ng/#/classify"  class="list-group-item active" target="mainFrame">
+                    分类列表
+                    </a>
+                </div>
+        </div>
+
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" 
+                   href="#lib2">
+            <h4 class="panel-title">
+                <p >
+                   图书管理
+                </p>
+            </h4>
+        </div>
+        <div id="lib2" class="panel-collapse collapse">
+                <div class="list-group">
+                    <a href="/ng/#/booksList"  class="list-group-item active" target="mainFrame">
+                    图书列表
+                    </a>
+                </div>
+                <div class="list-group">
+                    <a href="/ng/#/booksAdd"  class="list-group-item active" target="mainFrame">
+                    图书入库
+                    </a>
+                </div>
+                <div class="list-group">
+                    <a href="/ng/#/classify"  class="list-group-item active" target="mainFrame">
+                    图书审核
+                    </a>
+                </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+</body>
+<script>
+</script>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="utf-8"> 
+    <title>左侧导航</title>   
+    <link href="/common/css/bootstrap.css" type="text/css" rel="stylesheet" /> 
 </head>
 <style type="text/css">
 body{
@@ -38,7 +109,7 @@ body{
 <div class="nav">
 
 <p><a href="/ng/#/classify" class="list-group-item" target="mainFrame" >分类管理</a> </p>
-<p><a href="" class="list-group-item" target="mainFrame" >图书管理</a> </p>
+<p><a href="/ng/#/booklib" class="list-group-item" target="mainFrame" >图书管理</a> </p>
 <p><a href="" class="list-group-item" target="mainFrame" >权限管理</a> </p>
 <p><a href="" class="list-group-item" target="mainFrame" >销售管理</a> </p>
 
@@ -47,4 +118,4 @@ body{
 </body>
 <script>
 </script>
-</html>
+</html> -->
