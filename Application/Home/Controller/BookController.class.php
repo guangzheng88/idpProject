@@ -82,9 +82,66 @@ class BookController extends BaseController {
         $this->ajaxReturn($result);
     }
     /**
-     * 库存审核列表页,图书列表页
+     * 图书列表页
      */
     public function index()
+    {
+        $limit = I('limit',10,'intval');
+        $offset = I('offset',0,'intval');
+        //搜索条件
+        $name = I('name');
+        $cate = I('cate');
+        $status = I('status');
+        if($name)
+        {
+            $map['name'] = array('like','%'.trim($name).'%');
+        }
+        if($cate){
+            //查询分类
+            $cate_id = M('category')->where(array('title'=>array('like'=>'%'.trim($cate).'%')))->getField('id');
+            $cate_id = $cate_id ? $cate_id : 0;
+            $map['b.cate_id'] = array('eq',$cate_id);
+        }
+        if($status == '1'){
+            //查询已审核
+            $map['r.status'] = array('eq',$status);
+        }
+        if($status == '2')
+        {
+            //查询未审核
+            $map['r.status'] = array('eq','0');
+        }
+        $map['r.status'] = 1;
+        $res['count'] = M('repertory')->alias('r')->where($map)->join('book as b on r.book_id=b.id')->join('category as c on b.cate_id=c.id')->count();
+        $row = M('repertory')->alias('r')->where($map)->order('b.id desc')->join('book as b on r.book_id=b.id')->join('category as c on b.cate_id=c.id')
+                ->field('r.id as r_id,b.id,r.status,b.num,r.pur_price,r.number,r.create_time,b.serial_number,b.name,b.price,b.author,b.publish_club,c.title')
+                ->limit($limit,$offset)
+                ->select();
+        $res['status'] = 1;
+        $res['list'] = $row;
+        $this->ajaxReturn($res);
+    }
+    /**
+     * 查询图书是否已存在
+     */
+    public function findBook()
+    {
+        $map['serial_number'] =I('serial_number');
+        $bookInfo = M('book')->field('book.*,r.pur_price')->where($map)->join('repertory as r on r.book_id=book.id')->find();
+        if($bookInfo)
+        {
+            $res['status'] = 1;
+            $res['data'] = $bookInfo;
+        }else
+        {
+            $res['status'] = 0;
+        }
+        $this->ajaxReturn($res);
+    }
+    /**
+     * 库存审核列表页
+     */
+    public function getList()
     {
         $limit = I('limit',10,'intval');
         $offset = I('offset',0,'intval');
@@ -118,23 +175,6 @@ class BookController extends BaseController {
                 ->select();
         $res['status'] = 1;
         $res['list'] = $row;
-        $this->ajaxReturn($res);
-    }
-    /**
-     * 查询图书是否已存在
-     */
-    public function findBook()
-    {
-        $map['serial_number'] =I('serial_number');
-        $bookInfo = M('book')->field('book.*,r.pur_price')->where($map)->join('repertory as r on r.book_id=book.id')->find();
-        if($bookInfo)
-        {
-            $res['status'] = 1;
-            $res['data'] = $bookInfo;
-        }else
-        {
-            $res['status'] = 0;
-        }
         $this->ajaxReturn($res);
     }
 }
