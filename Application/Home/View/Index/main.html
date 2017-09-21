@@ -2,11 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>首页</title>
+    <style type="text/css">
+        table td{padding:20px 0;text-align: center;font-size:14px;}
+    </style>
 </head>
-<body>
-<div style="margin: 80px auto;text-align: center;">
-   <p style="font-size: 25px;padding-left: 40px 60px;color: #A7A7A7;"> 欢迎  登录</p>
-   </diiv>
+<body style="background: #f1f1f1;">
+<div style="margin: 40px auto;text-align: center;">
+   <p style="font-size: 25px;padding-left: 40px 60px;color: #A7A7A7;"> 欢迎您{$Think.session.userinfo.username}</p>
+</diiv>
+<p style="text-align:left;">系统信息：</p>
+<table cellspacing='0' cellpadding='0' border="0" width="100%">
+    <tr>
+    <td width="20%">服务器操作系统：</td>
+    <td width="30%">{$sys_info.os}>(<{$sys_info.ip})</td>
+    <td width="20%">Web 服务器：</td>
+    <td width="30%">{$sys_info.web_server}</td>
+    </tr>
+    <tr>
+    <td>PHP 版本：</td>
+    <td>{$sys_info.php_ver}</td>
+    <td>Zlib 支持：</td>
+    <td>{$sys_info.zlib}</td>
+    </tr>
+    <tr>
+    <td>安全模式：</td>
+    <td>{$sys_info.safe_mode}</td>
+    <td>安全模式GID：</td>
+    <td>{$sys_info.safe_mode_gid}</td>
+    </tr>
+    <tr>
+    <td>Socket 支持：</td>
+    <td>{$sys_info.socket}</td>
+    <td>上传单个文件最大：</td>
+    <td>{$sys_info.post_max_size}</td>
+    </tr>
+    <tr>
+    <td> 版本：</td>
+    <td>v1.1 VERSION {$sys.web_site}</td>
+    <td>日期：</td>
+    <td>{$sys_info.date}</td>
+    </tr>
+</table>
 </body>
 </html>

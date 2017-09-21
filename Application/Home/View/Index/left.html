@@ -7,6 +7,7 @@
     <script src ="/common/js/angular.min.js" type="text/javascript" ></script>    
     <script src ="/common/js/jquery.min.js" type="text/javascript" ></script>
     <script src ="/common/js/bootstrap.js" type="text/javascript" ></script>
+    <script src ="/common/js/home.js" type="text/javascript" ></script>
     <link href="/ng/css/template.css" type="text/css" rel="stylesheet" />
 <style type="text/css">
     .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
@@ -17,7 +18,7 @@
 }
 </style>
 </head>
-<body  class="lj-left">
+<body  class="lj-left" style="background: url(__PUBLIC__/images/banner.jpg)repeat;">
 <div class="panel-group" id="accordion" >
 
 
@@ -32,7 +33,7 @@
                 </p>
             </h4>
         </div>
-        <div id="lib1" class="panel-collapse collapse">
+        <div id="lib1" class="panel-collapse collapse in">
                 <div class="list-group">
                     <a href="/ng/#/classify"  class="list-group-item active" target="mainFrame">
                     分类列表
@@ -50,17 +51,17 @@
         </div>
         <div id="lib2" class="panel-collapse collapse">
                 <div class="list-group">
-                    <a href="/ng/#/booksAdd"  class="list-group-item active" target="mainFrame">
+                    <a href="/ng/#/booksAdd"  class="list-group-item" target="mainFrame">
                     图书入库
                     </a>
                 </div>
                 <div class="list-group">
-                    <a href="/ng/#/booksList"  class="list-group-item active" target="mainFrame">
+                    <a href="/ng/#/booksList"  class="list-group-item" target="mainFrame">
                     图书列表
                     </a>
                 </div>
                 <div class="list-group">
-                    <a href="/ng/#/booksAuditing"  class="list-group-item active" target="mainFrame">
+                    <a href="/ng/#/booksAuditing"  class="list-group-item" target="mainFrame">
                     图书审核
                     </a>
                 </div>
@@ -77,12 +78,12 @@
         </div>
         <div id="lib3" class="panel-collapse collapse">
                 <div class="list-group">
-                    <a href="/ng/#/user"  class="list-group-item active" target="mainFrame">
+                    <a href="/ng/#/user"  class="list-group-item" target="mainFrame">
                     用户列表
                     </a>
                 </div>
                 <div class="list-group">
-                    <a href="/ng/#/role"  class="list-group-item active" target="mainFrame">
+                    <a href="/ng/#/role"  class="list-group-item" target="mainFrame">
                     角色列表
                     </a>
                 </div>
@@ -98,7 +99,7 @@
         </div>
         <div id="lib4" class="panel-collapse collapse">
                 <div class="list-group">
-                    <a href="/ng/#/sell"  class="list-group-item active" target="mainFrame">
+                    <a href="/ng/#/sell"  class="list-group-item" target="mainFrame">
                     销售列表
                     </a>
                 </div>
