@@ -14,7 +14,7 @@ class RoleController extends BaseController {
      */
     public function getList()
     {
-        $res = M('role')->select();
+        $res = M('role')->order('id desc')->select();
         $str = '';
         foreach ($res as $k=>$v)
         {
@@ -36,7 +36,9 @@ class RoleController extends BaseController {
         $result['auth'] = $row;
         $result['status'] = 1;
         $result['list'] = $res;
-        $this->ajaxReturn($result);
+        $this->assign('data',$res);
+        $this->assign('auth',$row);
+        $this->display('Admin/getRole');exit;
     }
     /**
      * 添加角色页面
@@ -54,34 +56,38 @@ class RoleController extends BaseController {
     {
         $post = I('post.');
         $data['title'] = trim($post['title']);
-        //$data['auth_ids'] = implode(',', $post['authId']);
+        // $data['auth_ids'] = implode(',', $post['authId']);
         $data['create_time'] = date('Y-m-d H:i:s');
         $res = M('role')->data($data)->add();
         if($res)
         {
             $result['status'] = 1;
+            $this->success('添加成功');
         }else
         {
             $result['status'] = 0;
             $result['error'] = '添加失败';
+            $this->error('添加失败');
         }
-        $this->ajaxReturn($result);
     }
     /**
      * 修改权限
      */
     public function updateAuth()
     {
-        $id = I('id',0,'intval');
-        $data['auth_ids'] = trim(I('ids'),',');
+        $post = I('post.');
+        $id = I('post.id',0,'intval');
+        $data['auth_ids'] = implode(',', $post['authId']);
         if($data['auth_ids']) $res = M('role')->data($data)->where(array('id'=>$id))->save();
         if($res)
         {
             $result['status'] = 1;
+            $this->success('操作成功');exit;
         }else
         {
             $result['status'] = 0;
             $result['error'] = '修改失败';
+            $this->error('操作失败');
         }
         $this->ajaxReturn($result);
     }

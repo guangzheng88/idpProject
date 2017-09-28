@@ -14,6 +14,11 @@ class BookController extends BaseController {
      */
     public function addBook()
     {
+        if(!IS_POST) {
+            $cateRes = M('category')->select();
+            $this->assign('data',$cateRes);
+            $this->display();exit;
+        }
         $data = I('post.');
         //图书仓库数据
         $dataR['status'] = 0;
@@ -46,13 +51,13 @@ class BookController extends BaseController {
         }
         if($res)
         {
-            $result['status'] = 1;
+            $this->success('添加成功',U('book/index'));exit;
         }else
         {
+            $this->error('添加失败');
             $result['status'] = 0;
             $result['error'] = '添加失败';
         }
-        $this->ajaxReturn($result);
     }
     /**
      * 库存审核
@@ -62,22 +67,24 @@ class BookController extends BaseController {
     public function checkBook()
     {
         $data['status'] = 1;
-        $map['id'] = array('eq',I('id'));
+        $map['id'] = array('eq',I('get.id'));
         $reperRow = M('repertory')->where($map)->find();
         $resR = M('repertory')->where($map)->data($data)->save();
         if($resR)
         {
             //新增图书库存
             $condition['id'] = array('eq',$reperRow['book_id']);
-            $res = M('book')->where($condition)->setInc('num',I('num'));
+            $res = M('book')->where($condition)->setInc('num',I('get.num'));
         }
         if($res)
         {
             $result['status'] = 1;
+            $this->success('审核成功',U('book/getList'));exit;
         }else
         {
             $result['status'] = 0;
             $result['error'] = '审核失败';
+            $this->error('审核失败');
         }
         $this->ajaxReturn($result);
     }
@@ -89,9 +96,10 @@ class BookController extends BaseController {
         $limit = I('limit',10,'intval');
         $offset = I('offset',0,'intval');
         //搜索条件
-        $name = I('name');
-        $cate = I('cate');
+        $name = I('get.name');
+        $cate = I('get.cate');
         $status = I('status');
+        $this->assign('param',I('get.'));
         if($name)
         {
             $map['name'] = array('like','%'.trim($name).'%');
@@ -112,14 +120,18 @@ class BookController extends BaseController {
             $map['r.status'] = array('eq','0');
         }
         $map['r.status'] = 1;
-        $res['count'] = M('repertory')->alias('r')->where($map)->join('book as b on r.book_id=b.id')->join('category as c on b.cate_id=c.id')->count();
+        $count = M('repertory')->alias('r')->where($map)->join('book as b on r.book_id=b.id')->join('category as c on b.cate_id=c.id')->count();
+        $Page  = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $show  = $Page->show();// 分页显示输出
         $row = M('repertory')->alias('r')->where($map)->order('b.id desc')->join('book as b on r.book_id=b.id')->join('category as c on b.cate_id=c.id')
                 ->field('r.id as r_id,b.id,r.status,b.num,r.pur_price,r.number,r.create_time,b.serial_number,b.name,b.price,b.author,b.publish_club,c.title')
-                ->limit($limit,$offset)
+                ->limit($Page->firstRow.','.$Page->listRows)
                 ->select();
         $res['status'] = 1;
         $res['list'] = $row;
-        $this->ajaxReturn($res);
+        $this->assign('data',$row);
+        $this->assign('page',$show);
+        $this->display();
     }
     /**
      * 查询图书是否已存在
@@ -146,9 +158,10 @@ class BookController extends BaseController {
         $limit = I('limit',10,'intval');
         $offset = I('offset',0,'intval');
         //搜索条件
-        $name = I('name');
-        $cate = I('cate');
+        $name = I('get.name');
+        $cate = I('get.cate');
         $status = I('status');
+        $this->assign('param',I('get.'));
         if($name)
         {
             $map['name'] = array('like','%'.trim($name).'%');
@@ -168,13 +181,17 @@ class BookController extends BaseController {
             //查询未审核
             $map['r.status'] = array('eq','0');
         }
-        $res['count'] = M('repertory')->alias('r')->where($map)->join('book as b on r.book_id=b.id')->join('category as c on b.cate_id=c.id')->count();
+        $count = M('repertory')->alias('r')->where($map)->join('book as b on r.book_id=b.id')->join('category as c on b.cate_id=c.id')->count();
+        $Page  = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $show  = $Page->show();// 分页显示输出
         $row = M('repertory')->alias('r')->where($map)->order('b.id desc')->join('book as b on r.book_id=b.id')->join('category as c on b.cate_id=c.id')
                 ->field('r.id as r_id,b.id,r.status,b.num,r.pur_price,r.number,r.create_time,b.serial_number,b.name,b.price,b.author,b.publish_club,c.title')
-                ->limit($limit,$offset)
+                ->limit($Page->firstRow.','.$Page->listRows)
                 ->select();
         $res['status'] = 1;
         $res['list'] = $row;
-        $this->ajaxReturn($res);
+        $this->assign('data',$row);
+        $this->assign('page',$show);
+        $this->display();
     }
 }

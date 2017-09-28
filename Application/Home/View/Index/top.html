@@ -1,33 +1,47 @@
-<!doctype html>  
-<html>  
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <link href="/ng/css/template.css" type="text/css" rel="stylesheet" />
-    <link href="/common/css/bootstrap.css" type="text/css" rel="stylesheet" />   
-  </head>  
-  <style type="text/css">
-      .panel-body{
-        padding: 10px 16px;
-      }
-      .col-md-9{ cursor:pointer;}
-  </style>
-  <body style="background: url(__PUBLIC__/images/banner.jpg)repeat;">  
-    <span class="top">
-      <div class="panel panel-default">
-        <div class="panel-body" style="background: url(__PUBLIC__/images/banner.jpg)repeat;">          
-            <div class="row">
-                <div class="col-xs-9" title="首页"><strong style="font-size: 20px;color:#B22222; ">IDP教育集团图书仓库管理系统</strong> </div>
-                <div class="col-xs-2" style="color: white;">
-                <if condition="$userinfo.username">
-                欢迎 {$userinfo.username}
-                </if>
-                </div>
-                <div class="col-xs-1"><a href="__APP__/login/loginOut" ">退出</a></div>
-
-            </div>        
-        </div>
-    </div>     
-    </span>  
-  </body>
-</html>  
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>IDP教育集团图书仓库管理系统</title>
+<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="__PUBLIC__/js/jquery.js"></script>
+<script type="text/javascript">
+$(function(){ 
+  //顶部导航切换
+  $(".nav li a").click(function(){
+    $(".nav li a.selected").removeClass("selected")
+    $(this).addClass("selected");
+  })  
+})  
+</script>
+</head>
+<body style="background:url(__PUBLIC__/images/topbg.gif) repeat-x;">
+    <div class="topleft">
+    <a href="javascript:;" onclick="top.window.location.href='/'" style="line-height: 88px;font-size: 27px;color: white;">IDP教育集团后台管理</a>
+    </div>
+        
+    <ul class="nav">
+    <li><a href="javascript:;" target="rightFrame" class="selected"><img src="__PUBLIC__/images/icon01.png" title="工作台" /><h2>工作台</h2></a></li>
+    <li><a href="javascript:;" target="rightFrame"><img src="__PUBLIC__/images/icon02.png" title="模型管理" /><h2>模型管理</h2></a></li>
+    <li><a href="javascript:;"  target="rightFrame"><img src="__PUBLIC__/images/icon03.png" title="模块设计" /><h2>模块设计</h2></a></li>
+    <li><a href="javascript:;"  target="rightFrame"><img src="__PUBLIC__/images/icon04.png" title="常用工具" /><h2>常用工具</h2></a></li>
+    <li><a href="javascript:;" target="rightFrame"><img src="__PUBLIC__/images/icon05.png" title="文件管理" /><h2>文件管理</h2></a></li>
+    <li><a href="javascript:;"  target="rightFrame"><img src="__PUBLIC__/images/icon06.png" title="系统设置" /><h2>系统设置</h2></a></li>
+    </ul>
+            
+    <div class="topright">    
+    <ul>
+    <li><span><img src="__PUBLIC__/images/help.png" title="帮助"  class="helpimg"/></span><a href="javascript:;">帮助</a></li>
+    <li><a href="javascript:;">关于</a></li>
+    <li><a href="__APP__/login/loginOut" target="_parent">退出</a></li>
+    </ul>
+     
+    <div class="user">
+    <span>{$userinfo.username}</span>
+    <i>消息</i>
+    <b>5</b>
+    </div>    
+    
+    </div>
+</body>
+</html>

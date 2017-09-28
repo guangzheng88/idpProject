@@ -16,7 +16,8 @@ class BaseController extends Controller {
             $result['status'] = 0;
             $result['isLogin'] = 0;
             $result['error'] = '用户未登录';
-            $this->ajaxReturn($result);
+            $this->error($result['error']);
+            // $this->ajaxReturn($result);
         }
         //查看权限是否存在
         $map['class_name'] = $auth['class_name'];
@@ -34,7 +35,8 @@ class BaseController extends Controller {
             {
                 $result['status'] = 0;
                 $result['error'] = '权限不足';
-                $this->ajaxReturn($result);
+                // $this->ajaxReturn($result);
+                $this->error($result['error']);
             }
         }
     }

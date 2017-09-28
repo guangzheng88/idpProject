@@ -33,7 +33,24 @@ class IndexController extends Controller {
     public function main()
     {
         /* 系统信息 */
-
+        $this->assign('userinfo',session('userinfo'));
+        $date = date('H');
+        if($date >= 5 && $date <=11)
+        {
+            $hell = '早上好!';
+        }else if($date >= 11 && $date <=13)
+        {
+            $hell = '中午好!';
+        }else if($date >= 13 && $date <=18)
+        {
+            $hell = '下午好!';
+        }else if($date >= 18 && $date <=23)
+        {
+            $hell = '晚上好!';
+        }else{
+            $hell = '凌晨好!';
+        }
+        $this->assign('hell',$hell);
         $sys_info['os']            = PHP_OS;
 
         $sys_info['ip']            = $_SERVER['SERVER_ADDR'];

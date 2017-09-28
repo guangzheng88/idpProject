@@ -16,10 +16,16 @@ class SellController extends BaseController {
         $limit = I('limit',10,'intval');
         $offset = I('offset',0,'intval');
         $res['count'] = M('sell')->count();
-        $data = M('sell')->limit($limit,$offset)->order('id desc')->field('sell.id,b.name,sell.price,sell.num,actual_price,sell.create_time')->join('book as b on sell.book_id=b.id')->select();
+        $Page  = new \Think\Page($res['count'],10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $show  = $Page->show();// 分页显示输出
+        $data = M('sell')->limit($Page->firstRow.','.$Page->listRows)->order('sell.id desc')->field('sell.id,b.name,sell.price,sell.num,actual_price,sell.create_time')->join('book as b on sell.book_id=b.id')->select();
+        $total_price = M('sell')->field('sum(sell.actual_price) as total_price')->join('book as b on sell.book_id=b.id')->find();
         $res['status'] = 1;
         $res['list'] = $data;
-        $this->ajaxReturn($res);
+        $this->assign('data',$data);
+        $this->assign('page',$show);
+        $this->assign('total_price',$total_price['total_price']);
+        $this->display();
     }
     /**
      * 添加销售
@@ -40,11 +46,12 @@ class SellController extends BaseController {
         }
         if($res)
         {
-            $result['status'] = 1;
+            $this->success('操作成功');exit;
         }else
         {
             $result['status'] = 0;
             $result['error'] = '添加销售记录失败';
+            $this->error('操作失败');exit;
         }
         $this->ajaxReturn($result);
     }

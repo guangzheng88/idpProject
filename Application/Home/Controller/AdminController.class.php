@@ -14,15 +14,17 @@ class AdminController extends BaseController {
      */
     public function auditAdmin()
     {
-        $data['status'] = I('status',0,'intval');
-        $res = M('admin')->where(array('id'=>I('id')))->data($data)->save();
+        $data['status'] = I('get.status',0,'intval');
+        $res = M('admin')->where(array('id'=>I('get.id')))->data($data)->save();
         if($res)
         {
             $result['status'] = 1;
+            $this->success('操作成功',U('admin/getList'));exit;
         }else
         {
             $result['status'] = 0;
-            $result['error'] = '审核失败';
+            $result['error'] = '操作失败';
+            $this->error('操作失败');
         }
         $this->ajaxReturn($result);
     }
@@ -35,7 +37,9 @@ class AdminController extends BaseController {
         $offset = I('offset',0,'intval');
         $map['username'] = array('neq','admin');
         $res['count'] = M('admin')->where($map)->limit($limit,$offset)->count();
-        $row = M('admin')->where($map)->limit($limit,$offset)->order('id desc')->select();
+        $Page  = new \Think\Page($res['count'],10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $show  = $Page->show();// 分页显示输出
+        $row = M('admin')->where($map)->limit($Page->firstRow.','.$Page->listRows)->order('id desc')->select();
         $res['status'] = 1;
         //查询角色
         foreach ($row as $key=>$val)
@@ -54,7 +58,10 @@ class AdminController extends BaseController {
         $roles = M('role')->select();
         $res['role'] = $roles;
         $this->assign('row',$row);
-        $this->ajaxReturn($res);
+        $this->assign('data',$row);
+        $this->assign('page',$show);
+        $this->assign('role',$roles);
+        $this->display();
     }
     /**
      * 获取角色列表
@@ -64,6 +71,8 @@ class AdminController extends BaseController {
         $role = M('role')->select();
         $res['status'] = 1;
         $res['list'] = $role;
+        $this->assign('data',$role);
+        $this->display();exit;
         $this->ajaxReturn($res);
     }
     /**
@@ -78,10 +87,12 @@ class AdminController extends BaseController {
         if($res)
         {
             $result['status'] = 1;
+            $this->success('操作成功',U('admin/getList'));exit;
         }else
         {
             $result['status'] = 0;
             $result['error'] = '操作失败';
+            $this->error($result['error']);
         }
         $this->ajaxReturn($result);
     }

@@ -1,48 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>首页</title>
-    <style type="text/css">
-        table td{padding:20px 0;text-align: center;font-size:14px;}
-    </style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+
 </head>
-<body style="background: #f1f1f1;">
-<div style="margin: 40px auto;text-align: center;">
-   <p style="font-size: 25px;padding-left: 40px 60px;color: #A7A7A7;"> 欢迎您{$Think.session.userinfo.username}</p>
-</diiv>
-<p style="text-align:left;">系统信息：</p>
-<table cellspacing='0' cellpadding='0' border="0" width="100%">
-    <tr>
-    <td width="20%">服务器操作系统：</td>
-    <td width="30%">{$sys_info.os}>(<{$sys_info.ip})</td>
-    <td width="20%">Web 服务器：</td>
-    <td width="30%">{$sys_info.web_server}</td>
-    </tr>
-    <tr>
-    <td>PHP 版本：</td>
-    <td>{$sys_info.php_ver}</td>
-    <td>Zlib 支持：</td>
-    <td>{$sys_info.zlib}</td>
-    </tr>
-    <tr>
-    <td>安全模式：</td>
-    <td>{$sys_info.safe_mode}</td>
-    <td>安全模式GID：</td>
-    <td>{$sys_info.safe_mode_gid}</td>
-    </tr>
-    <tr>
-    <td>Socket 支持：</td>
-    <td>{$sys_info.socket}</td>
-    <td>上传单个文件最大：</td>
-    <td>{$sys_info.post_max_size}</td>
-    </tr>
-    <tr>
-    <td> 版本：</td>
-    <td>v1.1 VERSION {$sys.web_site}</td>
-    <td>日期：</td>
-    <td>{$sys_info.date}</td>
-    </tr>
-</table>
+
+
+<body>
+
+    <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="javascript:;">首页</a></li>
+    </ul>
+    </div>
+    
+    <div class="mainindex">
+    
+    
+    <div class="welinfo">
+    <span><img src="__PUBLIC__/images/sun.png" alt="天气" /></span>
+    <b>{$userinfo.username} {$hell}，欢迎使用IDP教育集团图书仓库管理系统</b>
+    <a href="javascript:;">帐号设置</a>
+    </div>
+    
+    <div class="welinfo">
+    <span><img src="__PUBLIC__/images/time.png" alt="时间" /></span>
+    <i>您上次登录的时间：{$sys_info['date']}</i> （不是您登录的？<a href="javascript:;">请点这里</a>）
+    </div>
+    
+    <div class="xline"></div>
+    
+    <ul class="iconlist">
+    
+    <li><img src="__PUBLIC__/images/ico01.png" /><p><a href="__MODULE__/admin/getList">用户列表</a></p></li>
+    <li><img src="__PUBLIC__/images/ico02.png" /><p><a href="__MODULE__/book/addBook">添加图书</a></p></li>
+    <li><img src="__PUBLIC__/images/ico03.png" /><p><a href="__MODULE__/sell/index">销售列表</a></p></li>
+    <li><img src="__PUBLIC__/images/ico04.png" /><p><a href="__MODULE__/book">图书列表</a></p></li>
+    <li><img src="__PUBLIC__/images/ico05.png" /><p><a href="__MODULE__/role/getList">角色列表</a></p></li>
+    <!-- <li><img src="__PUBLIC__/images/ico06.png" /><p><a href="javascript:;">查询</a></p></li>  -->
+            
+    </ul>
+    
+    <div class="ibox"><a class="ibtn"><img src="__PUBLIC__/images/iadd.png" />添加新的快捷功能</a></div>
+    
+    <div class="xline"></div>
+    <div class="box"></div>
+    
+    <div class="welinfo">
+    <span><img src="__PUBLIC__/images/dp.png" alt="提醒" /></span>
+    <b>IDP教育集团图书仓库管理系统使用指南</b>
+    </div>
+    
+    <ul class="infolist">
+    <li><span>您可以快速进行图书发布管理操作</span><a class="ibtn" href="__MODULE__/book/addBook">发布或管理图书</a></li>
+    <li><span>您可以快速管理用户</span><a class="ibtn" href="__MODULE__/admin/getList">审核用户</a></li>
+    <li><span>您可以快速查看图书销售情况</span><a class="ibtn" href="__MODULE__/sell/index">查看销售情况</a></li>
+    </ul>
+    
+    <div class="xline"></div>
+
+    
+    <ul class="umlist">
+    <li><a href="__MODULE__/book/addBook">如何发布图书</a></li>
+    <li><a href="__MODULE__/book/getList">如何审核图书</a></li>
+    <li><a href="__MODULE__/role/getList">如何创建角色</a></li>
+    <li><a href="__MODULE__/admin/getList">后台用户设置(权限)</a></li>
+    <li><a href="__MODULE__/admin/getList">如何审核用户</a></li>
+    <li><a href="__MODULE__/book">如何出售图书</a></li>
+    </ul>
+    
+    
+    </div>
 </body>
 </html>
